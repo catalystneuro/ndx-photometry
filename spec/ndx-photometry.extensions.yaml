@@ -1,8 +1,153 @@
 groups:
-- neurodata_type_def: TetrodeSeries
-  neurodata_type_inc: ElectricalSeries
-  doc: An extension of ElectricalSeries to include the tetrode ID for each time series.
-  attributes:
-  - name: trode_id
-    dtype: int32
-    doc: The tetrode ID.
+- neurodata_type_def: FibersTable
+  neurodata_type_inc: DynamicTable
+  doc: An extension of DynamicTable to hold various Fibers
+  datasets:
+  - name: location
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: location of fiber
+  - name: excitation_source
+    neurodata_type_inc: DynamicTableRegion
+    dtype: int
+    shape:
+    - null
+    doc: ''
+  - name: photodetector
+    neurodata_type_inc: DynamicTableRegion
+    dtype: int
+    shape:
+    - null
+    doc: ''
+  - name: description
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: description of fiber
+  - name: fiber_model_number
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: ''
+    quantity: '?'
+  - name: dichroic_model_number
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: ''
+    quantity: '?'
+- neurodata_type_def: PhotodetectorsTable
+  neurodata_type_inc: DynamicTable
+  doc: An extension of DynamicTable to hold various Photodetectors
+  datasets:
+  - name: peak_wavelength
+    neurodata_type_inc: VectorData
+    dtype: float
+    shape:
+    - null
+    doc: in nm
+    attributes:
+    - name: unit
+      dtype: text
+      value: nanometers
+      doc: ''
+  - name: type
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: ''
+  - name: gain
+    neurodata_type_inc: VectorData
+    dtype: float
+    shape:
+    - null
+    doc: ''
+  - name: model_number
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: ''
+    quantity: '?'
+- neurodata_type_def: ExcitationSourcesTable
+  neurodata_type_inc: DynamicTable
+  doc: An extension of DynamicTable to hold various Photodetectors
+  datasets:
+  - name: peak_wavelength
+    neurodata_type_inc: VectorData
+    dtype: float
+    shape:
+    - null
+    doc: in nm
+    attributes:
+    - name: unit
+      dtype: text
+      value: nanometers
+      doc: ''
+  - name: type
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: ''
+  - name: commanded_voltage
+    neurodata_type_inc: VectorData
+    dtype:
+      target_type: CommandedVoltageSeries
+      reftype: object
+    shape:
+    - null
+    doc: ''
+  - name: output
+    neurodata_type_inc: VectorData
+    dtype: float
+    shape:
+    - null
+    doc: ''
+    quantity: '?'
+  - name: model_number
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: ''
+    quantity: '?'
+- neurodata_type_def: CommandedVoltageSeries
+  neurodata_type_inc: TimeSeries
+  doc: An extension of TimeSeries to hold a Commanded Voltage
+  datasets:
+  - name: data
+    neurodata_type_inc: VectorData
+    dtype: float
+    shape:
+    - null
+    doc: in nm
+    attributes:
+    - name: unit
+      dtype: text
+      value: nanometers
+      doc: ''
+  - name: frequency
+    neurodata_type_inc: VectorData
+    dtype: float
+    doc: ''
+    attributes:
+    - name: unit
+      dtype: text
+      value: hertz
+      doc: ''
+  - name: power
+    neurodata_type_inc: VectorData
+    dtype: float
+    doc: ''
+    attributes:
+    - name: unit
+      dtype: text
+      value: volts
+      doc: ''

@@ -8,14 +8,15 @@ namespaces:
   schema:
   - namespace: core
     neurodata_types:
-    - ElectricalSeries
     - TimeSeries
     - NWBDataInterface
     - NWBContainer
   - namespace: hdmf-common
     neurodata_types:
+    - DynamicTable
     - DynamicTableRegion
     - VectorData
     - Data
+    - ElementIdentifiers
   - source: ndx-photometry.extensions.yaml
   version: 0.1.0
