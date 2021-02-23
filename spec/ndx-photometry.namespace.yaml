@@ -11,6 +11,7 @@ namespaces:
     - TimeSeries
     - NWBDataInterface
     - NWBContainer
+    - RoiResponseSeries
   - namespace: hdmf-common
     neurodata_types:
     - DynamicTable

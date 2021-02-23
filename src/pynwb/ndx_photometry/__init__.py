@@ -22,8 +22,8 @@ if not os.path.exists(ndx_photometry_specpath):
 load_namespaces(ndx_photometry_specpath)
 
 # TODO: import your classes here or define your class using get_class to make
+
 # them accessible at the package level
-#FibersTable = get_class('FibersTable', 'ndx-photometry')
-#PhotodetectorsTable = get_class('PhotodetectorsTable', 'ndx-photometry')
-#ExcitationSourcesTable = get_class('ExcitationSourcesTable', 'ndx-photometry')
 CommandedVoltageSeries = get_class('CommandedVoltageSeries', 'ndx-photometry')
+from .ndx_photometry import ExcitationSourcesTable, PhotodetectorsTable, FibersTable
+DeconvolvedRoiResponseSeries = get_class('DeconvolvedRoiResponseSeries', 'ndx-photometry')

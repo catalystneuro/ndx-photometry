@@ -29,7 +29,7 @@ def main():
     ns_builder.include_type('TimeSeries', namespace='core')
     ns_builder.include_type('NWBDataInterface', namespace='core')
     ns_builder.include_type('NWBContainer', namespace='core')
-    ns_builder.include_type('RoiResponseSeries', namespace='ophys')
+    ns_builder.include_type('RoiResponseSeries', namespace='core')
     ns_builder.include_type('DynamicTable', namespace='hdmf-common')
     ns_builder.include_type('DynamicTableRegion', namespace='hdmf-common')
     ns_builder.include_type('VectorData', namespace='hdmf-common')
@@ -186,21 +186,18 @@ def main():
                 doc='voltage length ntime in volts',
                 dtype='float',
                 shape=(None,),
-                neurodata_type_inc='VectorData',
-                attributes=[NWBAttributeSpec(name='unit', doc='',value='nanometers', dtype='text')]
+                attributes=[NWBAttributeSpec(name='unit', doc='',value='volts', dtype='text')]
             ),
             NWBDatasetSpec(
                 name='frequency',
                 doc='voltage frequency in unit hertz',
                 dtype='float',
-                neurodata_type_inc='VectorData',
                 attributes=[NWBAttributeSpec(name='unit', doc='',value='hertz', dtype='text')]
             ),
             NWBDatasetSpec(
                 name='power',
                 doc='voltage power in unit volts',
                 dtype='float',
-                neurodata_type_inc='VectorData',
                 attributes=[NWBAttributeSpec(name='unit', doc='',value='volts', dtype='text')]
             ),
         ],

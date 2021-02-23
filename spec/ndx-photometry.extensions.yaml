@@ -1,7 +1,7 @@
 groups:
 - neurodata_type_def: FibersTable
   neurodata_type_inc: DynamicTable
-  doc: An extension of DynamicTable to hold various Fibers
+  doc: Extends DynamicTable to hold various Fibers
   datasets:
   - name: location
     neurodata_type_inc: VectorData
@@ -14,13 +14,13 @@ groups:
     dtype: int
     shape:
     - null
-    doc: ''
+    doc: references rows of ExcitationSourcesTable
   - name: photodetector
     neurodata_type_inc: DynamicTableRegion
     dtype: int
     shape:
     - null
-    doc: ''
+    doc: references rows of PhotodetectorsTable
   - name: description
     neurodata_type_inc: VectorData
     dtype: text
@@ -43,14 +43,14 @@ groups:
     quantity: '?'
 - neurodata_type_def: PhotodetectorsTable
   neurodata_type_inc: DynamicTable
-  doc: An extension of DynamicTable to hold various Photodetectors
+  doc: Extends DynamicTable to hold various Photodetectors
   datasets:
   - name: peak_wavelength
     neurodata_type_inc: VectorData
     dtype: float
     shape:
     - null
-    doc: in nm
+    doc: peak wavelength of photodetector
     attributes:
     - name: unit
       dtype: text
@@ -61,7 +61,7 @@ groups:
     dtype: text
     shape:
     - null
-    doc: ''
+    doc: '"PMT" or "photodiode"'
   - name: gain
     neurodata_type_inc: VectorData
     dtype: float
@@ -73,18 +73,18 @@ groups:
     dtype: text
     shape:
     - null
-    doc: ''
+    doc: model number of the photodector
     quantity: '?'
 - neurodata_type_def: ExcitationSourcesTable
   neurodata_type_inc: DynamicTable
-  doc: An extension of DynamicTable to hold various Photodetectors
+  doc: Extends DynamicTable to hold various Photodetectors
   datasets:
   - name: peak_wavelength
     neurodata_type_inc: VectorData
     dtype: float
     shape:
     - null
-    doc: in nm
+    doc: peak wavelength of photodetector
     attributes:
     - name: unit
       dtype: text
@@ -95,7 +95,7 @@ groups:
     dtype: text
     shape:
     - null
-    doc: ''
+    doc: '"LED" or "laser"'
   - name: commanded_voltage
     neurodata_type_inc: VectorData
     dtype:
@@ -103,13 +103,13 @@ groups:
       reftype: object
     shape:
     - null
-    doc: ''
+    doc: references CommandedVoltageSeries
   - name: output
     neurodata_type_inc: VectorData
     dtype: float
     shape:
     - null
-    doc: ''
+    doc: references TimeSeries
     quantity: '?'
   - name: model_number
     neurodata_type_inc: VectorData
@@ -120,34 +120,53 @@ groups:
     quantity: '?'
 - neurodata_type_def: CommandedVoltageSeries
   neurodata_type_inc: TimeSeries
-  doc: An extension of TimeSeries to hold a Commanded Voltage
+  doc: Extends TimeSeries to hold a Commanded Voltage
   datasets:
   - name: data
-    neurodata_type_inc: VectorData
     dtype: float
     shape:
     - null
-    doc: in nm
+    doc: voltage length ntime in volts
     attributes:
     - name: unit
       dtype: text
-      value: nanometers
+      value: volts
       doc: ''
   - name: frequency
-    neurodata_type_inc: VectorData
     dtype: float
-    doc: ''
+    doc: voltage frequency in unit hertz
     attributes:
     - name: unit
       dtype: text
       value: hertz
       doc: ''
   - name: power
-    neurodata_type_inc: VectorData
     dtype: float
-    doc: ''
+    doc: voltage power in unit volts
     attributes:
     - name: unit
       dtype: text
       value: volts
       doc: ''
+- neurodata_type_def: DeconvolvedRoiResponseSeries
+  neurodata_type_inc: RoiResponseSeries
+  doc: Extends RoiResponseSeries to hold deconvolved data
+  datasets:
+  - name: raw
+    neurodata_type_inc: VectorData
+    dtype:
+      target_type: RoiResponseSeries
+      reftype: object
+    shape:
+    - null
+    doc: ''
+  - name: deconvolution_filter
+    neurodata_type_inc: VectorData
+    dtype: text
+    doc: description of deconvolution filter used
+    quantity: '?'
+  - name: downsampling_filter
+    neurodata_type_inc: VectorData
+    dtype: text
+    doc: description of downsampling filter used
+    quantity: '?'
