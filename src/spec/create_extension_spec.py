@@ -54,19 +54,19 @@ def main():
             NWBDatasetSpec(
                 name='excitation_source',
                 doc='references rows of ExcitationSourcesTable',
-                dtype='int',
+                #dtype='int',
                 shape=(None,),
                 neurodata_type_inc='DynamicTableRegion'
             ),
             NWBDatasetSpec(
                 name='photodetector',
                 doc='references rows of PhotodetectorsTable',
-                dtype='int',
+                #dtype='int',
                 shape=(None,),
                 neurodata_type_inc='DynamicTableRegion'
             ),
             NWBDatasetSpec(
-                name='description',
+                name='notes',
                 doc='description of fiber',
                 dtype='text',
                 shape=(None,),
@@ -143,7 +143,7 @@ def main():
                 attributes=[NWBAttributeSpec(name='unit',doc='',value='nanometers',dtype='text')]
             ),
             NWBDatasetSpec(
-                name='type',
+                name='source_type',
                 doc='"LED" or "laser"',
                 dtype='text',
                 shape=(None,),

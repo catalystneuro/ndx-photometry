@@ -11,17 +11,15 @@ groups:
     doc: location of fiber
   - name: excitation_source
     neurodata_type_inc: DynamicTableRegion
-    dtype: int
     shape:
     - null
     doc: references rows of ExcitationSourcesTable
   - name: photodetector
     neurodata_type_inc: DynamicTableRegion
-    dtype: int
     shape:
     - null
     doc: references rows of PhotodetectorsTable
-  - name: description
+  - name: notes
     neurodata_type_inc: VectorData
     dtype: text
     shape:
@@ -90,7 +88,7 @@ groups:
       dtype: text
       value: nanometers
       doc: ''
-  - name: type
+  - name: source_type
     neurodata_type_inc: VectorData
     dtype: text
     shape:

@@ -14,7 +14,7 @@ if not os.path.exists(ndx_photometry_specpath):
     ndx_photometry_specpath = os.path.abspath(os.path.join(
         os.path.dirname(__file__),
         '..', '..', '..',
-        'spec',
+        'spec', 'ndx-photometry'
         'ndx-photometry.namespace.yaml'
     ))
 
@@ -24,6 +24,18 @@ load_namespaces(ndx_photometry_specpath)
 # TODO: import your classes here or define your class using get_class to make
 
 # them accessible at the package level
-CommandedVoltageSeries = get_class('CommandedVoltageSeries', 'ndx-photometry')
-from .ndx_photometry import ExcitationSourcesTable, PhotodetectorsTable, FibersTable
-DeconvolvedRoiResponseSeries = get_class('DeconvolvedRoiResponseSeries', 'ndx-photometry')
+(
+    CommandedVoltageSeries,
+    ExcitationSourcesTable,
+    PhotodetectorsTable,
+    FibersTable,
+    DeconvolvedRoiResponseSeries
+) = [
+    get_class(x, 'ndx-photometry') for x in (
+        'CommandedVoltageSeries',
+        'ExcitationSourcesTable',
+        'PhotodetectorsTable',
+        'FibersTable',
+        'DeconvolvedRoiResponseSeries'
+    )
+]

@@ -4,11 +4,16 @@ import numpy as np
 from pynwb import NWBHDF5IO, NWBFile
 from pynwb.core import DynamicTableRegion
 from pynwb.device import Device
-from pynwb.ecephys import ElectrodeGroup
-from pynwb.file import ElectrodeTable as get_electrode_table
 from pynwb.testing import TestCase, remove_test_file, AcquisitionH5IOMixin
 
-from ndx_photometry import FibersTable, PhotodetectorsTable, ExcitationSourcesTable, CommandedVoltageSeries, DeconvolvedRoiResponseSeries
+from ndx_photometry import (
+    FibersTable,
+    PhotodetectorsTable,
+    ExcitationSourcesTable,
+    CommandedVoltageSeries,
+    DeconvolvedRoiResponseSeries
+)
+
 
 def set_up_nwbfile():
     nwbfile = NWBFile(
@@ -17,11 +22,8 @@ def set_up_nwbfile():
         session_start_time=datetime.datetime.now(datetime.timezone.utc)
     )
 
-    # device = nwbfile.create_device(
-    #     name='device_name'
-    # )
-
     return nwbfile #, device
+
 
 class TestFibersTable(TestCase):
 
@@ -30,33 +32,44 @@ class TestFibersTable(TestCase):
 
         self.nwbfile = set_up_nwbfile()
 
-
     def test_constructor(self):
-        self.commandedvoltage_series = CommandedVoltageSeries(name='commanded_voltage',
-                                                              data=[1,2,3],
-                                                              frequency=30.0,
-                                                              power=500.0,
-                                                              rate=30.0)
-        self.excitationsources_table = ExcitationSourcesTable(name='excitation_sources',
-                                                              description='excitation sources table')
-        self.excitationsources_table.add_row(peak_wavelength=700.0,
-                                             type='laser',
-                                             commanded_voltage=self.commandedvoltage_series)
-        self.photodetectors_table = PhotodetectorsTable(name='photodetectors_table',
-                                                        description='photodetectors table')
-        self.photodetectors_table.add_row(peak_wavelength=500.0,
-                                          type = 'PMT',
-                                          gain=100.0)
-        self.fiberstable = FibersTable(name='fibers_table',
-                                       description='fibers table')
-        self.fiberstable.add_row(location='brain',
-                                excitation_source=self.excitationsources_table,
-                                photodetector=self.photodetectors_table,
-                                description='fibers in a brain'
-                                )
+        self.commandedvoltage_series = CommandedVoltageSeries(
+            name='commanded_voltage',
+            data=[1, 2, 3],
+            frequency=30.0,
+            power=500.0,
+            rate=30.0
+        )
+        self.excitationsources_table = ExcitationSourcesTable(
+            name='excitation_sources', description='excitation sources table')
+        self.excitationsources_table.add_row(
+            peak_wavelength=700.0,
+            source_type='laser',
+            commanded_voltage=self.commandedvoltage_series
+        )
+        self.photodetectors_table = PhotodetectorsTable(
+            name='photodetectors_table', description='photodetectors table')
+        self.photodetectors_table.add_row(peak_wavelength=500.0, type='PMT', gain=100.0)
+        self.fiberstable = FibersTable(name='fibers_table', description='fibers table')
+        self.fiberstable.add_row(
+            location='brain',
+            excitation_source=DynamicTableRegion(
+                name="excitation_source",
+                data=[0],
+                description="region of excitation source table",
+                table=self.excitationsources_table
+            ),
+            photodetector=DynamicTableRegion(
+                name="photodetector",
+                data=[0],
+                description="region of photodetector table",
+                table=self.photodetectors_table
+            ),
+            notes='fibers in a brain'
+        )
 
-        ophys_module = self.nwbfile.create_processing_module(name='ophys',
-                                                             description='fiber photometry')
+        ophys_module = self.nwbfile.create_processing_module(
+            name='ophys', description='fiber photometry')
         ophys_module.add(self.commandedvoltage_series)
         ophys_module.add(self.excitationsources_table)
         ophys_module.add(self.photodetectors_table)
@@ -78,35 +91,49 @@ class TestTetrodeSeriesRoundtrip(TestCase):
         self.nwbfile = set_up_nwbfile()
         self.path = 'test.nwb'
 
-    def tearDown(self):
-        remove_test_file(self.path)
+    #def tearDown(self):
+    #    remove_test_file(self.path)
 
     def test_roundtrip(self):
-        self.commandedvoltage_series = CommandedVoltageSeries(name='commanded_voltage',
-                                                              data=[1, 2, 3],
-                                                              frequency=30.0,
-                                                              power=500.0,
-                                                              rate=30.0)
-        self.excitationsources_table = ExcitationSourcesTable(name='excitation_sources',
-                                                              description='excitation sources table')
-        self.excitationsources_table.add_row(peak_wavelength=700.0,
-                                             type='laser',
-                                             commanded_voltage=self.commandedvoltage_series)
-        self.photodetectors_table = PhotodetectorsTable(name='photodetectors_table',
-                                                        description='photodetectors table')
-        self.photodetectors_table.add_row(peak_wavelength=500.0,
-                                          type='PMT',
-                                          gain=100.0)
-        self.fiberstable = FibersTable(name='fibers_table',
-                                       description='fibers table')
-        self.fiberstable.add_row(location='brain',
-                                 excitation_source=self.excitationsources_table,
-                                 photodetector=self.photodetectors_table,
-                                 description='fibers in a brain'
-                                 )
+        self.commandedvoltage_series = CommandedVoltageSeries(
+            name='commanded_voltage',
+            data=[1, 2, 3],
+            frequency=30.0,
+            power=500.0,
+            rate=30.0
+        )
+        self.excitationsources_table = ExcitationSourcesTable(
+            name='excitation_sources', description='excitation sources table')
+        self.excitationsources_table.add_row(
+            peak_wavelength=700.0,
+            source_type='laser',
+            commanded_voltage=self.commandedvoltage_series
+        )
+        self.photodetectors_table = PhotodetectorsTable(
+            name='photodetectors_table', description='photodetectors table')
+        self.photodetectors_table.add_row(
+            peak_wavelength=500.0, type='PMT', gain=100.0)
+        self.fiberstable = FibersTable(
+            name='fibers_table', description='fibers table')
+        self.fiberstable.add_row(
+            location="brain",
+            excitation_source=DynamicTableRegion(
+                name="excitation_source",
+                data=[0],
+                description="region of excitation source table",
+                table=self.excitationsources_table
+            ),
+            photodetector=DynamicTableRegion(
+                name="photodetector",
+                data=[0],
+                description="region of photodetector table",
+                table=self.photodetectors_table
+            ),
+            notes='fibers in a brain'
+        )
 
-        self.ophys_module = self.nwbfile.create_processing_module(name='ophys',
-                                                             description='fiber photometry')
+        self.ophys_module = self.nwbfile.create_processing_module(
+            name='ophys', description='fiber photometry')
         self.ophys_module.add(self.commandedvoltage_series)
         self.ophys_module.add(self.excitationsources_table)
         self.ophys_module.add(self.photodetectors_table)
@@ -117,7 +144,7 @@ class TestTetrodeSeriesRoundtrip(TestCase):
 
         with NWBHDF5IO(self.path, mode='r', load_namespaces=True) as io:
             read_nwbfile = io.read()
-            self.assertContainerEqual(self.ophys_module, read_nwbfile.modules['ophys'])
+            self.assertContainerEqual(self.ophys_module, read_nwbfile.processing['ophys'])
 #
 #
 # class TestTetrodeSeriesRoundtripPyNWB(AcquisitionH5IOMixin, TestCase):
