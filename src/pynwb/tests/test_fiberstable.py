@@ -11,7 +11,6 @@ from ndx_photometry import (
     FibersTable,
     PhotodetectorsTable,
     ExcitationSourcesTable,
-    CommandedVoltageSeries,
     DeconvolvedRoiResponseSeries,
     MultiCommandedVoltage
 )
@@ -181,7 +180,7 @@ class TestTetrodeSeriesRoundtrip(TestCase):
         )
 
         roi_response_series = RoiResponseSeries(
-            name='RoiResponseSeries',
+            name='roi_response_series',
             description='my roi response series',
             data=np.random.randn(100, 1),
             rate=30.,
@@ -194,7 +193,7 @@ class TestTetrodeSeriesRoundtrip(TestCase):
             data=np.random.randn(100, 1),
             rate=30.,
             rois=fibers_ref,
-            raw=roi_response_series
+            roi_response_series=roi_response_series
         )
 
         self.ophys_module = self.nwbfile.create_processing_module(

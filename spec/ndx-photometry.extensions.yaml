@@ -163,7 +163,7 @@ groups:
     doc: description of downsampling filter used
     quantity: '?'
   groups:
-  - name: raw
+  - name: roi_response_series
     neurodata_type_inc: RoiResponseSeries
     doc: ref to roi response series
 - neurodata_type_def: MultiCommandedVoltage

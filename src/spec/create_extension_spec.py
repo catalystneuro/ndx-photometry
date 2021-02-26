@@ -222,7 +222,7 @@ def main():
         doc='Extends RoiResponseSeries to hold deconvolved data',
         groups=[
             NWBGroupSpec(
-                name='raw',
+                name='roi_response_series',
                 neurodata_type_inc='RoiResponseSeries',
                 doc='ref to roi response series'
             )
