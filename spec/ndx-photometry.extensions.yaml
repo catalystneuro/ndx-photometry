@@ -11,11 +11,13 @@ groups:
     doc: location of fiber
   - name: excitation_source
     neurodata_type_inc: DynamicTableRegion
+    dtype: int
     shape:
     - null
     doc: references rows of ExcitationSourcesTable
   - name: photodetector
     neurodata_type_inc: DynamicTableRegion
+    dtype: int
     shape:
     - null
     doc: references rows of PhotodetectorsTable
@@ -30,14 +32,14 @@ groups:
     dtype: text
     shape:
     - null
-    doc: ''
+    doc: doc
     quantity: '?'
   - name: dichroic_model_number
     neurodata_type_inc: VectorData
     dtype: text
     shape:
     - null
-    doc: ''
+    doc: doc
     quantity: '?'
 - neurodata_type_def: PhotodetectorsTable
   neurodata_type_inc: DynamicTable
@@ -65,7 +67,7 @@ groups:
     dtype: float
     shape:
     - null
-    doc: ''
+    doc: doc
   - name: model_number
     neurodata_type_inc: VectorData
     dtype: text
@@ -114,7 +116,7 @@ groups:
     dtype: text
     shape:
     - null
-    doc: ''
+    doc: doc
     quantity: '?'
 - neurodata_type_def: CommandedVoltageSeries
   neurodata_type_inc: TimeSeries
@@ -129,7 +131,7 @@ groups:
     - name: unit
       dtype: text
       value: volts
-      doc: ''
+      doc: doc
   - name: frequency
     dtype: float
     doc: voltage frequency in unit hertz
@@ -137,7 +139,7 @@ groups:
     - name: unit
       dtype: text
       value: hertz
-      doc: ''
+      doc: doc
   - name: power
     dtype: float
     doc: voltage power in unit volts
@@ -145,19 +147,11 @@ groups:
     - name: unit
       dtype: text
       value: volts
-      doc: ''
+      doc: doc
 - neurodata_type_def: DeconvolvedRoiResponseSeries
   neurodata_type_inc: RoiResponseSeries
   doc: Extends RoiResponseSeries to hold deconvolved data
   datasets:
-  - name: raw
-    neurodata_type_inc: VectorData
-    dtype:
-      target_type: RoiResponseSeries
-      reftype: object
-    shape:
-    - null
-    doc: ''
   - name: deconvolution_filter
     neurodata_type_inc: VectorData
     dtype: text
@@ -168,3 +162,14 @@ groups:
     dtype: text
     doc: description of downsampling filter used
     quantity: '?'
+  groups:
+  - name: raw
+    neurodata_type_inc: RoiResponseSeries
+    doc: ref to roi response series
+- neurodata_type_def: MultiCommandedVoltage
+  neurodata_type_inc: NWBDataInterface
+  doc: holds CommandedVoltageSeries objects
+  groups:
+  - neurodata_type_inc: CommandedVoltageSeries
+    doc: commanded voltage series
+    quantity: '*'

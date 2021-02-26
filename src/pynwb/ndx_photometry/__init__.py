@@ -29,13 +29,15 @@ load_namespaces(ndx_photometry_specpath)
     ExcitationSourcesTable,
     PhotodetectorsTable,
     FibersTable,
-    DeconvolvedRoiResponseSeries
+    DeconvolvedRoiResponseSeries,
+    MultiCommandedVoltage
 ) = [
     get_class(x, 'ndx-photometry') for x in (
         'CommandedVoltageSeries',
         'ExcitationSourcesTable',
         'PhotodetectorsTable',
         'FibersTable',
-        'DeconvolvedRoiResponseSeries'
+        'DeconvolvedRoiResponseSeries',
+        'MultiCommandedVoltage'
     )
 ]

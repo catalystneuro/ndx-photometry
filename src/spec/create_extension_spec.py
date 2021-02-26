@@ -42,7 +42,7 @@ def main():
     fibers_table = NWBGroupSpec(
         neurodata_type_def='FibersTable',
         neurodata_type_inc='DynamicTable',
-        doc=('Extends DynamicTable to hold various Fibers'),
+        doc='Extends DynamicTable to hold various Fibers',
         datasets=[
             NWBDatasetSpec(
                 name='location',
@@ -54,14 +54,14 @@ def main():
             NWBDatasetSpec(
                 name='excitation_source',
                 doc='references rows of ExcitationSourcesTable',
-                #dtype='int',
+                dtype='int',
                 shape=(None,),
                 neurodata_type_inc='DynamicTableRegion'
             ),
             NWBDatasetSpec(
                 name='photodetector',
                 doc='references rows of PhotodetectorsTable',
-                #dtype='int',
+                dtype='int',
                 shape=(None,),
                 neurodata_type_inc='DynamicTableRegion'
             ),
@@ -74,7 +74,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name='fiber_model_number',
-                doc='',
+                doc='doc',
                 dtype='text',
                 shape=(None,),
                 neurodata_type_inc='VectorData',
@@ -82,7 +82,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name='dichroic_model_number',
-                doc='',
+                doc='doc',
                 dtype='text',
                 shape=(None,),
                 neurodata_type_inc='VectorData',
@@ -94,7 +94,7 @@ def main():
     photodetectors_table = NWBGroupSpec(
         neurodata_type_def='PhotodetectorsTable',
         neurodata_type_inc='DynamicTable',
-        doc=('Extends DynamicTable to hold various Photodetectors'),
+        doc='Extends DynamicTable to hold various Photodetectors',
         datasets=[
             NWBDatasetSpec(
                 name='peak_wavelength',
@@ -113,7 +113,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name='gain',
-                doc='',
+                doc='doc',
                 dtype='float',
                 shape=(None,),
                 neurodata_type_inc='VectorData',
@@ -132,7 +132,7 @@ def main():
     excitationsources_table = NWBGroupSpec(
         neurodata_type_def='ExcitationSourcesTable',
         neurodata_type_inc='DynamicTable',
-        doc=('Extends DynamicTable to hold various Photodetectors'),
+        doc='Extends DynamicTable to hold various Photodetectors',
         datasets=[
             NWBDatasetSpec(
                 name='peak_wavelength',
@@ -153,7 +153,7 @@ def main():
             NWBDatasetSpec(
                 name='commanded_voltage',
                 doc='references CommandedVoltageSeries',
-                dtype=NWBRefSpec(target_type='CommandedVoltageSeries',reftype='object'),
+                dtype=NWBRefSpec(target_type='CommandedVoltageSeries', reftype='object'),
                 shape=(None,),
                 neurodata_type_inc='VectorData',
             ),
@@ -167,7 +167,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name='model_number',
-                doc='',
+                doc='doc',
                 dtype='text',
                 shape=(None,),
                 neurodata_type_inc='VectorData',
@@ -179,42 +179,55 @@ def main():
     commandedvoltage_series = NWBGroupSpec(
         neurodata_type_def='CommandedVoltageSeries',
         neurodata_type_inc='TimeSeries',
-        doc=('Extends TimeSeries to hold a Commanded Voltage'),
+        doc='Extends TimeSeries to hold a Commanded Voltage',
         datasets=[
             NWBDatasetSpec(
                 name='data',
                 doc='voltage length ntime in volts',
                 dtype='float',
                 shape=(None,),
-                attributes=[NWBAttributeSpec(name='unit', doc='',value='volts', dtype='text')]
+                attributes=[NWBAttributeSpec(name='unit', doc='doc', value='volts', dtype='text')]
             ),
             NWBDatasetSpec(
                 name='frequency',
                 doc='voltage frequency in unit hertz',
                 dtype='float',
-                attributes=[NWBAttributeSpec(name='unit', doc='',value='hertz', dtype='text')]
+                attributes=[NWBAttributeSpec(name='unit', doc='doc' ,value='hertz', dtype='text')]
             ),
             NWBDatasetSpec(
                 name='power',
                 doc='voltage power in unit volts',
                 dtype='float',
-                attributes=[NWBAttributeSpec(name='unit', doc='',value='volts', dtype='text')]
+                attributes=[NWBAttributeSpec(name='unit', doc='doc', value='volts', dtype='text')]
             ),
         ],
+    )
+
+    multi_commanded_voltage = NWBGroupSpec(
+        neurodata_type_def='MultiCommandedVoltage',
+        neurodata_type_inc='NWBDataInterface',
+        doc='holds CommandedVoltageSeries objects',
+        groups=[
+            NWBGroupSpec(
+                neurodata_type_inc='CommandedVoltageSeries',
+                quantity='*',
+                doc='commanded voltage series'
+            )
+        ]
     )
 
     deconvolvedroiresponse_series = NWBGroupSpec(
         neurodata_type_def='DeconvolvedRoiResponseSeries',
         neurodata_type_inc='RoiResponseSeries',
-        doc=('Extends RoiResponseSeries to hold deconvolved data'),
-        datasets=[
-            NWBDatasetSpec(
+        doc='Extends RoiResponseSeries to hold deconvolved data',
+        groups=[
+            NWBGroupSpec(
                 name='raw',
-                doc='',
-                dtype=NWBRefSpec(target_type='RoiResponseSeries', reftype='object'),
-                shape=(None,),
-                neurodata_type_inc='VectorData',
-            ),
+                neurodata_type_inc='RoiResponseSeries',
+                doc='ref to roi response series'
+            )
+        ],
+        datasets=[
             NWBDatasetSpec(
                 name='deconvolution_filter',
                 doc='description of deconvolution filter used',
@@ -233,11 +246,14 @@ def main():
     )
 
     # TODO: add all of your new data types to this list
-    new_data_types = [fibers_table,
-                      photodetectors_table,
-                      excitationsources_table,
-                      commandedvoltage_series,
-                      deconvolvedroiresponse_series]
+    new_data_types = [
+        fibers_table,
+        photodetectors_table,
+        excitationsources_table,
+        commandedvoltage_series,
+        deconvolvedroiresponse_series,
+        multi_commanded_voltage
+    ]
 
     # export the spec to yaml files in the spec folder
     output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'spec'))
