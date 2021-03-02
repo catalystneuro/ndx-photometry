@@ -12,6 +12,7 @@ namespaces:
     - NWBDataInterface
     - NWBContainer
     - RoiResponseSeries
+    - LabMetaData
   - namespace: hdmf-common
     neurodata_types:
     - DynamicTable

@@ -9,6 +9,7 @@ from pynwb.spec import (
     NWBAttributeSpec,
     NWBDatasetSpec,
     NWBRefSpec,
+    NWBLinkSpec
 )
 
 # TODO: import the following spec classes as needed
@@ -38,6 +39,7 @@ def main():
     ns_builder.include_type("NWBDataInterface", namespace="core")
     ns_builder.include_type("NWBContainer", namespace="core")
     ns_builder.include_type("RoiResponseSeries", namespace="core")
+    ns_builder.include_type("LabMetaData", namespace="core")
     ns_builder.include_type("DynamicTable", namespace="hdmf-common")
     ns_builder.include_type("DynamicTableRegion", namespace="hdmf-common")
     ns_builder.include_type("VectorData", namespace="hdmf-common")
@@ -50,6 +52,7 @@ def main():
     fibers_table = NWBGroupSpec(
         neurodata_type_def="FibersTable",
         neurodata_type_inc="DynamicTable",
+        name='fibers',
         doc="Extends DynamicTable to hold various Fibers",
         datasets=[
             NWBDatasetSpec(
@@ -102,6 +105,7 @@ def main():
     photodetectors_table = NWBGroupSpec(
         neurodata_type_def="PhotodetectorsTable",
         neurodata_type_inc="DynamicTable",
+        name='photodetectors',
         doc="Extends DynamicTable to hold various Photodetectors",
         datasets=[
             NWBDatasetSpec(
@@ -144,6 +148,7 @@ def main():
     excitationsources_table = NWBGroupSpec(
         neurodata_type_def="ExcitationSourcesTable",
         neurodata_type_inc="DynamicTable",
+        name="excitation_sources",
         doc="Extends DynamicTable to hold various Photodetectors",
         datasets=[
             NWBDatasetSpec(
@@ -249,10 +254,10 @@ def main():
         neurodata_type_def="DeconvolvedRoiResponseSeries",
         neurodata_type_inc="RoiResponseSeries",
         doc="Extends RoiResponseSeries to hold deconvolved data",
-        groups=[
-            NWBGroupSpec(
-                name="roi_response_series",
-                neurodata_type_inc="RoiResponseSeries",
+        links=[
+            NWBLinkSpec(
+                name="raw",
+                target_type="RoiResponseSeries",
                 doc="ref to roi response series",
             )
         ],
@@ -274,6 +279,30 @@ def main():
         ],
     )
 
+    fiber_photometry = NWBGroupSpec(
+        neurodata_type_def='FiberPhotometry',
+        neurodata_type_inc='LabMetaData',
+        name='fiber_photometry',
+        doc='doc',
+        groups=[
+            NWBGroupSpec(
+                name='fibers',
+                neurodata_type_inc='FibersTable',
+                doc='doc'
+            ),
+            NWBGroupSpec(
+                name='excitation_sources',
+                neurodata_type_inc='ExcitationSourcesTable',
+                doc='doc'
+            ),
+            NWBGroupSpec(
+                name='photodetectors',
+                neurodata_type_inc='PhotodetectorsTable',
+                doc='doc'
+            )
+        ]
+    )
+
     # TODO: add all of your new data types to this list
     new_data_types = [
         fibers_table,
@@ -282,6 +311,7 @@ def main():
         commandedvoltage_series,
         deconvolvedroiresponse_series,
         multi_commanded_voltage,
+        fiber_photometry
     ]
 
     # export the spec to yaml files in the spec folder

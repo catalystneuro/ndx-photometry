@@ -33,6 +33,7 @@ load_namespaces(ndx_photometry_specpath)
     FibersTable,
     DeconvolvedRoiResponseSeries,
     MultiCommandedVoltage,
+    FiberPhotometry
 ) = [
     get_class(x, "ndx-photometry")
     for x in (
@@ -42,5 +43,6 @@ load_namespaces(ndx_photometry_specpath)
         "FibersTable",
         "DeconvolvedRoiResponseSeries",
         "MultiCommandedVoltage",
+        'FiberPhotometry'
     )
 ]

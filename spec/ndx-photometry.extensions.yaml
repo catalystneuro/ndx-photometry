@@ -1,6 +1,7 @@
 groups:
 - neurodata_type_def: FibersTable
   neurodata_type_inc: DynamicTable
+  name: fibers
   doc: Extends DynamicTable to hold various Fibers
   datasets:
   - name: location
@@ -43,6 +44,7 @@ groups:
     quantity: '?'
 - neurodata_type_def: PhotodetectorsTable
   neurodata_type_inc: DynamicTable
+  name: photodetectors
   doc: Extends DynamicTable to hold various Photodetectors
   datasets:
   - name: peak_wavelength
@@ -77,6 +79,7 @@ groups:
     quantity: '?'
 - neurodata_type_def: ExcitationSourcesTable
   neurodata_type_inc: DynamicTable
+  name: excitation_sources
   doc: Extends DynamicTable to hold various Photodetectors
   datasets:
   - name: peak_wavelength
@@ -89,7 +92,7 @@ groups:
     - name: unit
       dtype: text
       value: nanometers
-      doc: ''
+      doc: doc
   - name: source_type
     neurodata_type_inc: VectorData
     dtype: text
@@ -162,9 +165,9 @@ groups:
     dtype: text
     doc: description of downsampling filter used
     quantity: '?'
-  groups:
-  - name: roi_response_series
-    neurodata_type_inc: RoiResponseSeries
+  links:
+  - name: raw
+    target_type: RoiResponseSeries
     doc: ref to roi response series
 - neurodata_type_def: MultiCommandedVoltage
   neurodata_type_inc: NWBDataInterface
@@ -173,3 +176,17 @@ groups:
   - neurodata_type_inc: CommandedVoltageSeries
     doc: commanded voltage series
     quantity: '*'
+- neurodata_type_def: FiberPhotometry
+  neurodata_type_inc: LabMetaData
+  name: fiber_photometry
+  doc: doc
+  groups:
+  - name: fibers
+    neurodata_type_inc: FibersTable
+    doc: doc
+  - name: excitation_sources
+    neurodata_type_inc: ExcitationSourcesTable
+    doc: doc
+  - name: photodetectors
+    neurodata_type_inc: PhotodetectorsTable
+    doc: doc

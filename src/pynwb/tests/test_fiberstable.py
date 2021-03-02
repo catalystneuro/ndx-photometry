@@ -12,6 +12,7 @@ from ndx_photometry import (
     ExcitationSourcesTable,
     DeconvolvedRoiResponseSeries,
     MultiCommandedVoltage,
+    FiberPhotometry
 )
 
 
@@ -102,8 +103,8 @@ class TestTetrodeSeriesRoundtrip(TestCase):
         self.nwbfile = set_up_nwbfile()
         self.path = "test.nwb"
 
-    def tearDown(self):
-        remove_test_file(self.path)
+    #def tearDown(self):
+    #    remove_test_file(self.path)
 
     def test_roundtrip(self):
         multi_commanded_voltage = MultiCommandedVoltage(
@@ -131,7 +132,7 @@ class TestTetrodeSeriesRoundtrip(TestCase):
         )
 
         excitationsources_table = ExcitationSourcesTable(
-            name="excitation_sources", description="excitation sources table"
+            description="excitation sources table"
         )
 
         excitationsources_table.add_row(
@@ -140,12 +141,11 @@ class TestTetrodeSeriesRoundtrip(TestCase):
             commanded_voltage=cmmandedvoltage_series,
         )
         photodetectors_table = PhotodetectorsTable(
-            name="photodetectors_table", description="photodetectors table"
+            description="photodetectors table"
         )
         photodetectors_table.add_row(peak_wavelength=500.0, type="PMT", gain=100.0)
 
         fiberstable = FibersTable(
-            name="fibers_table",
             description="fibers table",
             columns=[
                 DynamicTableRegion(
@@ -188,18 +188,23 @@ class TestTetrodeSeriesRoundtrip(TestCase):
             data=np.random.randn(100, 1),
             rate=30.0,
             rois=fibers_ref,
-            roi_response_series=roi_response_series,
+            raw=roi_response_series,
         )
 
         ophys_module = self.nwbfile.create_processing_module(
             name="ophys", description="fiber photometry"
         )
 
+        self.nwbfile.add_lab_meta_data(
+            FiberPhotometry(
+                fibers=fiberstable,
+                excitation_sources=excitationsources_table,
+                photodetectors=photodetectors_table
+            )
+        )
+
         ophys_module.add(multi_commanded_voltage)
-        ophys_module.add(excitationsources_table)
-        ophys_module.add(photodetectors_table)
-        ophys_module.add(fiberstable)
-        ophys_module.add(roi_response_series)
+        self.nwbfile.add_acquisition(roi_response_series)
         ophys_module.add(deconv_roi_response_series)
 
         with NWBHDF5IO(self.path, mode="w") as io:
