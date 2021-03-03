@@ -18,6 +18,7 @@ namespaces:
     - DynamicTable
     - DynamicTableRegion
     - VectorData
+    - VectorIndex
     - Data
     - ElementIdentifiers
   - source: ndx-photometry.extensions.yaml

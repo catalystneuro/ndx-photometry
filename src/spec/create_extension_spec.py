@@ -43,6 +43,7 @@ def main():
     ns_builder.include_type("DynamicTable", namespace="hdmf-common")
     ns_builder.include_type("DynamicTableRegion", namespace="hdmf-common")
     ns_builder.include_type("VectorData", namespace="hdmf-common")
+    ns_builder.include_type("VectorIndex", namespace="hdmf-common")
     ns_builder.include_type("Data", namespace="hdmf-common")
     ns_builder.include_type("ElementIdentifiers", namespace="hdmf-common")
 
@@ -75,6 +76,18 @@ def main():
                 dtype="int",
                 shape=(None,),
                 neurodata_type_inc="DynamicTableRegion",
+            ),
+            NWBDatasetSpec(
+                name="fluorophores",
+                doc="references rows of FluorophoresTable",
+                shape=(None,),
+                neurodata_type_inc="DynamicTableRegion",
+            ),
+            NWBDatasetSpec(
+                name="fluorophores_index",
+                doc="indexes fluorphores of FluorophoresTable",
+                shape=(None,),
+                neurodata_type_inc="VectorIndex",
             ),
             NWBDatasetSpec(
                 name="notes",
@@ -299,8 +312,45 @@ def main():
                 name='photodetectors',
                 neurodata_type_inc='PhotodetectorsTable',
                 doc='doc'
+            ),
+            NWBGroupSpec(
+                name='fluorophores',
+                neurodata_type_inc='FluorophoresTable',
+                doc='doc'
             )
         ]
+    )
+
+    fluorophores_table = NWBGroupSpec(
+        neurodata_type_def="FluorophoresTable",
+        neurodata_type_inc="DynamicTable",
+        name='fluorophores',
+        doc="Extends DynamicTable to hold various Fluorophores",
+        datasets=[
+            NWBDatasetSpec(
+                name="label",
+                doc="name of fluorophore",
+                dtype="text",
+                shape=(None,),
+                neurodata_type_inc="VectorData",
+            ),
+            NWBDatasetSpec(
+                name="location",
+                doc='injection brain region name',
+                dtype="text",
+                shape=(None,),
+                neurodata_type_inc="VectorData",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="coordinates",
+                doc="injection taxonomical coordinates in (AP, ML, Z) in mm relative to Bregma",
+                dtype="float",
+                shape=(None,3),
+                neurodata_type_inc="VectorData",
+                quantity="?",
+            ),
+        ],
     )
 
     # TODO: add all of your new data types to this list
@@ -311,7 +361,8 @@ def main():
         commandedvoltage_series,
         deconvolvedroiresponse_series,
         multi_commanded_voltage,
-        fiber_photometry
+        fiber_photometry,
+        fluorophores_table
     ]
 
     # export the spec to yaml files in the spec folder

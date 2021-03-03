@@ -22,6 +22,16 @@ groups:
     shape:
     - null
     doc: references rows of PhotodetectorsTable
+  - name: fluorophores
+    neurodata_type_inc: DynamicTableRegion
+    shape:
+    - null
+    doc: references rows of FluorophoresTable
+  - name: fluorophores_index
+    neurodata_type_inc: VectorIndex
+    shape:
+    - null
+    doc: indexes fluorphores of FluorophoresTable
   - name: notes
     neurodata_type_inc: VectorData
     dtype: text
@@ -190,3 +200,32 @@ groups:
   - name: photodetectors
     neurodata_type_inc: PhotodetectorsTable
     doc: doc
+  - name: fluorophores
+    neurodata_type_inc: FluorophoresTable
+    doc: doc
+- neurodata_type_def: FluorophoresTable
+  neurodata_type_inc: DynamicTable
+  name: fluorophores
+  doc: Extends DynamicTable to hold various Fluorophores
+  datasets:
+  - name: label
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: name of fluorophore
+  - name: location
+    neurodata_type_inc: VectorData
+    dtype: text
+    shape:
+    - null
+    doc: injection brain region name
+    quantity: '?'
+  - name: coordinates
+    neurodata_type_inc: VectorData
+    dtype: float
+    shape:
+    - null
+    - 3
+    doc: injection taxonomical coordinates in (AP, ML, Z) in mm relative to Bregma
+    quantity: '?'
