@@ -202,13 +202,6 @@ class TestTetrodeSeriesRoundtrip(TestCase):
             description="fibers table"
         )
 
-        fibers_table.add_fiber(
-            excitation_source=1,
-            photodetector=0,
-            fluorophores=[0],
-            location='my location',
-            notes='notes'
-        )
 
         fibers_ref = DynamicTableRegion(
             name="rois", data=[0], description="source fibers", table=fibers_table
@@ -242,6 +235,14 @@ class TestTetrodeSeriesRoundtrip(TestCase):
                 photodetectors=photodetectors_table,
                 fluorophores=fluorophores_table
             )
+        )
+
+        fibers_table.add_fiber(
+            excitation_source=0,
+            photodetector=0,
+            fluorophores=[0],
+            location='my location',
+            notes='notes'
         )
 
         ophys_module.add(multi_commanded_voltage)

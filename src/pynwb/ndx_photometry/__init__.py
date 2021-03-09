@@ -25,12 +25,13 @@ load_namespaces(ndx_photometry_specpath)
 
 # TODO: import your classes here or define your class using get_class to make
 
+from .fibers_table import FibersTable
+
 # them accessible at the package level
 (
     CommandedVoltageSeries,
     ExcitationSourcesTable,
     PhotodetectorsTable,
-    FibersTable,
     DeconvolvedRoiResponseSeries,
     MultiCommandedVoltage,
     FiberPhotometry,
@@ -41,7 +42,6 @@ load_namespaces(ndx_photometry_specpath)
         "CommandedVoltageSeries",
         "ExcitationSourcesTable",
         "PhotodetectorsTable",
-        "FibersTable",
         "DeconvolvedRoiResponseSeries",
         "MultiCommandedVoltage",
         'FiberPhotometry',

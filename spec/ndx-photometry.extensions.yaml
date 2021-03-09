@@ -31,7 +31,7 @@ groups:
     neurodata_type_inc: VectorIndex
     shape:
     - null
-    doc: indexes fluorphores of FluorophoresTable
+    doc: indexes fluorophores of FluorophoresTable
   - name: notes
     neurodata_type_inc: VectorData
     dtype: text
@@ -43,14 +43,14 @@ groups:
     dtype: text
     shape:
     - null
-    doc: doc
+    doc: fiber model number
     quantity: '?'
   - name: dichroic_model_number
     neurodata_type_inc: VectorData
     dtype: text
     shape:
     - null
-    doc: doc
+    doc: dichroic model number
     quantity: '?'
 - neurodata_type_def: PhotodetectorsTable
   neurodata_type_inc: DynamicTable
