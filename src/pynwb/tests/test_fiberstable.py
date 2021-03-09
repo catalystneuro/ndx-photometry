@@ -147,12 +147,11 @@ class TestTetrodeSeriesRoundtrip(TestCase):
             source_type="laser",
             commanded_voltage=cmmandedvoltage_series,
         )
+
         photodetectors_table = PhotodetectorsTable(
             description="photodetectors table"
         )
         photodetectors_table.add_row(peak_wavelength=500.0, type="PMT", gain=100.0)
-
-
 
         fluorophores_table = FluorophoresTable(
             description='fluorophores'
@@ -166,39 +165,53 @@ class TestTetrodeSeriesRoundtrip(TestCase):
             table=fluorophores_table,
         )
 
-        fiberstable = FibersTable(
-            description="fibers table",
-            columns=[
-                DynamicTableRegion(
-                    name="excitation_source",
-                    data=[0],
-                    description="region of excitation source table",
-                    table=excitationsources_table,
-                ),
-                DynamicTableRegion(
-                    name="photodetector",
-                    data=[0],
-                    description="region of photodetector table",
-                    table=photodetectors_table,
-                ),
-                fluorophores_column,
-                VectorIndex(
-                    name='fluorophores_index',
-                    target=fluorophores_column,
-                    data=[1],
-                ),
-                VectorData(
-                    name="location",
-                    description="location of fiber",
-                    data=["my location"],
-                ),
-                VectorData(name="notes", description="notes", data=["my notes"]),
-            ],
-            colnames=["excitation_source", "photodetector", "fluorophores", "location", "notes"],
+        # fibers_table = FibersTable(
+        #     description="fibers table",
+        #     columns=[
+        #         DynamicTableRegion(
+        #             name="excitation_source",
+        #             data=[0],
+        #             description="region of excitation source table",
+        #             table=excitationsources_table,
+        #         ),
+        #         DynamicTableRegion(
+        #             name="photodetector",
+        #             data=[0],
+        #             description="region of photodetector table",
+        #             table=photodetectors_table,
+        #         ),
+        #         fluorophores_column,
+        #         VectorIndex(
+        #             name='fluorophores_index',
+        #             target=fluorophores_column,
+        #             data=[1],
+        #         ),
+        #         VectorData(
+        #             name="location",
+        #             description="location of fiber",
+        #             data=["my location"],
+        #         ),
+        #         VectorData(
+        #             name="notes",
+        #             description="notes",
+        #             data=["my notes"]),
+        #     ],
+        #     colnames=["excitation_source", "photodetector", "fluorophores", "location", "notes"],
+        # )
+        fibers_table = FibersTable(
+            description="fibers table"
+        )
+
+        fibers_table.add_row(
+            excitation_source=1,
+            photodetector=0,
+            fluorophores=[0],
+            location='my location',
+            notes='notes'
         )
 
         fibers_ref = DynamicTableRegion(
-            name="rois", data=[0], description="source fibers", table=fiberstable
+            name="rois", data=[0], description="source fibers", table=fibers_table
         )
 
         roi_response_series = RoiResponseSeries(
@@ -224,7 +237,7 @@ class TestTetrodeSeriesRoundtrip(TestCase):
 
         self.nwbfile.add_lab_meta_data(
             FiberPhotometry(
-                fibers=fiberstable,
+                fibers=fibers_table,
                 excitation_sources=excitationsources_table,
                 photodetectors=photodetectors_table,
                 fluorophores=fluorophores_table

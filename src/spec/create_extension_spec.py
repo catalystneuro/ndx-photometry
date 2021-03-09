@@ -85,7 +85,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name="fluorophores_index",
-                doc="indexes fluorphores of FluorophoresTable",
+                doc="indexes fluorophores of FluorophoresTable",
                 shape=(None,),
                 neurodata_type_inc="VectorIndex",
             ),
@@ -98,7 +98,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name="fiber_model_number",
-                doc="doc",
+                doc="fiber model number",
                 dtype="text",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
@@ -106,7 +106,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name="dichroic_model_number",
-                doc="doc",
+                doc="dichroic model number",
                 dtype="text",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
