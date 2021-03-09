@@ -2,9 +2,9 @@ import datetime
 import numpy as np
 
 from pynwb import NWBHDF5IO, NWBFile
-from pynwb.core import DynamicTableRegion, VectorData, VectorIndex
+from pynwb.core import DynamicTableRegion
 from pynwb.ophys import RoiResponseSeries
-from pynwb.testing import TestCase, remove_test_file
+from pynwb.testing import TestCase
 
 from ndx_photometry import (
     FibersTable,
@@ -201,7 +201,6 @@ class TestTetrodeSeriesRoundtrip(TestCase):
         fibers_table = FibersTable(
             description="fibers table"
         )
-
 
         fibers_ref = DynamicTableRegion(
             name="rois", data=[0], description="source fibers", table=fibers_table

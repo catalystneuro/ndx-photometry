@@ -1,10 +1,10 @@
 import os
 import warnings
 
-from pynwb import register_class, get_class
+from pynwb import get_class
 
-from hdmf.utils import docval, getargs
-from pynwb.core import DynamicTable, VectorIndex
+from hdmf.utils import docval
+from pynwb.core import VectorIndex
 
 
 @docval({'name': 'excitation_source',
