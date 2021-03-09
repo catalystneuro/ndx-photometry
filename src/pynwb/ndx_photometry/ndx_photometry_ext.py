@@ -1,11 +1,15 @@
+import os
 import warnings
 
-from hdmf.utils import docval
-from hdmf.common import DynamicTable
+from pynwb import register_class
+
+from hdmf.utils import docval, getargs
+
+from ndx_photometry import FibersTable
 
 
-class FibersTable(DynamicTable):
-
+@register_class('FibersTable', 'ndx-photometry')
+class FibersTable(FibersTable):
     @docval({'name': 'excitation_source',
              'type': 'int',
              'doc': 'references rows of ExcitationSourcesTable',
@@ -49,10 +53,11 @@ class FibersTable(DynamicTable):
             #  'shape': (None,),
             #  'quantity':'?'},
             allow_extra=True)
-    def add_row(self, **kwargs):
+    def add_fiber(self, **kwargs):
         """
         Add a row to this table
         """
+        #arg1, arg2, kwarg1 = getargs('arg1', 'arg2', 'kwarg1', **kwargs)
         referenced_tables = kwargs.keys()
         for table in referenced_tables:
             if table in self:
@@ -65,4 +70,4 @@ class FibersTable(DynamicTable):
                             warnings.warn(f'Reference to {table} that does not yet exist')
                     else:
                         col.table = dict(self)[table]
-        super(FibersTable, self).add_row(**kwargs)
+        #super(FibersTable, self).add_row(**kwargs)

@@ -202,7 +202,7 @@ class TestTetrodeSeriesRoundtrip(TestCase):
             description="fibers table"
         )
 
-        fibers_table.add_row(
+        fibers_table.add_fiber(
             excitation_source=1,
             photodetector=0,
             fluorophores=[0],
