@@ -109,7 +109,7 @@ fibers_ref = DynamicTableRegion(
 
 # Create a raw roiresponseseries, this is your main acquisition
 roi_response_series = RoiResponseSeries(
-    name="roi_response_series",
+    name="raw_fluorescence_trace",
     description="my roi response series",
     data=np.random.randn(100, 1),
     unit='F',
@@ -119,7 +119,7 @@ roi_response_series = RoiResponseSeries(
 
 # This is your processed data 
 deconv_roi_response_series = DeconvolvedRoiResponseSeries(
-    name="DeconvolvedRoiResponseSeries",
+    name="deconvolved_fluorescence_trace",
     description="my roi response series",
     data=np.random.randn(100, 1),
     unit='F',
@@ -145,8 +145,8 @@ with NWBHDF5IO(filename, 'w') as io:
 with NWBHDF5IO(filename, 'r', load_namespaces=True) as io:
     nwbfile = io.read()
     # Access and print information about the acquisition
-    print(nwbfile.acquisition["roi_response_series"])
+    print(nwbfile.acquisition["raw_fluorescence_trace"])
     # Access and print information about the processed data
-    print(nwbfile.processing['ophys']["DeconvolvedRoiResponseSeries"])
+    print(nwbfile.processing['ophys']["deconvolved_fluorescence_trace"])
     # Access and print all of the metadata
     print(nwbfile.lab_meta_data)
