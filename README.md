@@ -19,7 +19,7 @@ This extension was developed by Ryan Ly, Ben Dichter, and Akshay Jaggi.
 ## Installation
 
 ```
-pip install ndx-events
+pip install ndx-photometry
 ```
 
 
