@@ -16,7 +16,7 @@ if not os.path.exists(ndx_photometry_specpath):
             "..",
             "..",
             "spec",
-            "ndx-photometry" "ndx-photometry.namespace.yaml",
+            "ndx-photometry.namespace.yaml",
         )
     )
 

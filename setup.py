@@ -28,7 +28,7 @@ setup_args = {
     'long_description_content_type': readme_type,
     'author': 'Akshay Jaggi',
     'author_email': 'akshay.x.jaggi@gmail.com',
-    'url': '',
+    'url': 'https://github.com/akshay-jaggi/ndx-photometry',
     'license': 'BSD 3-Clause',
     'install_requires': [
         'pynwb>=1.3.0'

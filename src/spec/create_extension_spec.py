@@ -251,6 +251,7 @@ def main():
     )
 
     multi_commanded_voltage = NWBGroupSpec(
+        name='commanded_voltages',
         neurodata_type_def="MultiCommandedVoltage",
         neurodata_type_inc="NWBDataInterface",
         doc="holds CommandedVoltageSeries objects",
@@ -316,6 +317,11 @@ def main():
             NWBGroupSpec(
                 name='fluorophores',
                 neurodata_type_inc='FluorophoresTable',
+                doc='doc'
+            ),
+            NWBGroupSpec(
+                name='commanded_voltages',
+                neurodata_type_inc='MultiCommandedVoltage',
                 doc='doc'
             )
         ]

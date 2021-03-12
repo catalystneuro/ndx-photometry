@@ -181,6 +181,7 @@ groups:
     doc: ref to roi response series
 - neurodata_type_def: MultiCommandedVoltage
   neurodata_type_inc: NWBDataInterface
+  name: commanded_voltages
   doc: holds CommandedVoltageSeries objects
   groups:
   - neurodata_type_inc: CommandedVoltageSeries
@@ -202,6 +203,9 @@ groups:
     doc: doc
   - name: fluorophores
     neurodata_type_inc: FluorophoresTable
+    doc: doc
+  - name: commanded_voltages
+    neurodata_type_inc: MultiCommandedVoltage
     doc: doc
 - neurodata_type_def: FluorophoresTable
   neurodata_type_inc: DynamicTable
