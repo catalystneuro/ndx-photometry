@@ -25,9 +25,7 @@ nwbfile = NWBFile(
 # You can follow along here: 
 
 # Create a commanded voltage container, this can store one or more commanded voltage series
-multi_commanded_voltage = MultiCommandedVoltage(
-    name="MyMultiCommandedVoltage",
-)
+multi_commanded_voltage = MultiCommandedVoltage()
 
 # Add a commanded voltage series to this container
 commandedvoltage_series = (
@@ -85,7 +83,8 @@ nwbfile.add_lab_meta_data(
         fibers=fibers_table,
         excitation_sources=excitationsources_table,
         photodetectors=photodetectors_table,
-        fluorophores=fluorophores_table
+        fluorophores=fluorophores_table,
+        commanded_voltages=multi_commanded_voltage
     )
 )
 

@@ -27,11 +27,6 @@ groups:
     shape:
     - null
     doc: references rows of FluorophoresTable
-  - name: fluorophores_index
-    neurodata_type_inc: VectorIndex
-    shape:
-    - null
-    doc: indexes fluorophores of FluorophoresTable
   - name: notes
     neurodata_type_inc: VectorData
     dtype: text
@@ -79,7 +74,7 @@ groups:
     dtype: float
     shape:
     - null
-    doc: doc
+    doc: gain on the photodetector
   - name: model_number
     neurodata_type_inc: VectorData
     dtype: text
@@ -90,14 +85,14 @@ groups:
 - neurodata_type_def: ExcitationSourcesTable
   neurodata_type_inc: DynamicTable
   name: excitation_sources
-  doc: Extends DynamicTable to hold various Photodetectors
+  doc: Extends DynamicTable to hold various Excitation Sources
   datasets:
   - name: peak_wavelength
     neurodata_type_inc: VectorData
     dtype: float
     shape:
     - null
-    doc: peak wavelength of photodetector
+    doc: peak wavelength of the excitation source
     attributes:
     - name: unit
       dtype: text
@@ -122,14 +117,14 @@ groups:
     dtype: float
     shape:
     - null
-    doc: references TimeSeries
+    doc: excitation output, references TimeSeries
     quantity: '?'
   - name: model_number
     neurodata_type_inc: VectorData
     dtype: text
     shape:
     - null
-    doc: doc
+    doc: model number of the excitation source
     quantity: '?'
 - neurodata_type_def: CommandedVoltageSeries
   neurodata_type_inc: TimeSeries
@@ -139,12 +134,12 @@ groups:
     dtype: float
     shape:
     - null
-    doc: voltage length ntime in volts
+    doc: voltages (length number timesteps) in unit volts
     attributes:
     - name: unit
       dtype: text
       value: volts
-      doc: doc
+      doc: data unit
   - name: frequency
     dtype: float
     doc: voltage frequency in unit hertz
@@ -152,7 +147,7 @@ groups:
     - name: unit
       dtype: text
       value: hertz
-      doc: doc
+      doc: frequency unit
   - name: power
     dtype: float
     doc: voltage power in unit volts
@@ -160,7 +155,7 @@ groups:
     - name: unit
       dtype: text
       value: volts
-      doc: doc
+      doc: power unit
 - neurodata_type_def: DeconvolvedRoiResponseSeries
   neurodata_type_inc: RoiResponseSeries
   doc: Extends RoiResponseSeries to hold deconvolved data
@@ -194,19 +189,19 @@ groups:
   groups:
   - name: fibers
     neurodata_type_inc: FibersTable
-    doc: doc
+    doc: table of fibers used
   - name: excitation_sources
     neurodata_type_inc: ExcitationSourcesTable
-    doc: doc
+    doc: table of excitation sources used
   - name: photodetectors
     neurodata_type_inc: PhotodetectorsTable
-    doc: doc
+    doc: table of photodetectors used
   - name: fluorophores
     neurodata_type_inc: FluorophoresTable
-    doc: doc
+    doc: table of fluorophores used
   - name: commanded_voltages
     neurodata_type_inc: MultiCommandedVoltage
-    doc: doc
+    doc: multiple commanded voltage container
 - neurodata_type_def: FluorophoresTable
   neurodata_type_inc: DynamicTable
   name: fluorophores

@@ -83,12 +83,12 @@ def main():
                 shape=(None,),
                 neurodata_type_inc="DynamicTableRegion",
             ),
-            NWBDatasetSpec(
-                name="fluorophores_index",
-                doc="indexes fluorophores of FluorophoresTable",
-                shape=(None,),
-                neurodata_type_inc="VectorIndex",
-            ),
+            # NWBDatasetSpec(
+            #     name="fluorophores_index",
+            #     doc="indexes fluorophores of FluorophoresTable",
+            #     shape=(None,),
+            #     neurodata_type_inc="VectorIndex",
+            # ),
             NWBDatasetSpec(
                 name="notes",
                 doc="description of fiber",
@@ -142,7 +142,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name="gain",
-                doc="doc",
+                doc="gain on the photodetector",
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
@@ -162,11 +162,11 @@ def main():
         neurodata_type_def="ExcitationSourcesTable",
         neurodata_type_inc="DynamicTable",
         name="excitation_sources",
-        doc="Extends DynamicTable to hold various Photodetectors",
+        doc="Extends DynamicTable to hold various Excitation Sources",
         datasets=[
             NWBDatasetSpec(
                 name="peak_wavelength",
-                doc="peak wavelength of photodetector",
+                doc="peak wavelength of the excitation source",
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
@@ -194,15 +194,15 @@ def main():
             ),
             NWBDatasetSpec(
                 name="output",
-                doc="references TimeSeries",
-                dtype="float",  # TODO: why not int or NWBRefSpec since this is a reference?
+                doc="excitation output, references TimeSeries",
+                dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
                 quantity="?",
             ),
             NWBDatasetSpec(
                 name="model_number",
-                doc="doc",
+                doc="model number of the excitation source",
                 dtype="text",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
@@ -218,12 +218,12 @@ def main():
         datasets=[
             NWBDatasetSpec(
                 name="data",
-                doc="voltage length ntime in volts",
+                doc="voltages (length number timesteps) in unit volts",
                 dtype="float",
                 shape=(None,),
                 attributes=[
                     NWBAttributeSpec(
-                        name="unit", doc="doc", value="volts", dtype="text"
+                        name="unit", doc="data unit", value="volts", dtype="text"
                     )
                 ],
             ),
@@ -233,7 +233,7 @@ def main():
                 dtype="float",
                 attributes=[
                     NWBAttributeSpec(
-                        name="unit", doc="doc", value="hertz", dtype="text"
+                        name="unit", doc="frequency unit", value="hertz", dtype="text"
                     )
                 ],
             ),
@@ -243,7 +243,7 @@ def main():
                 dtype="float",
                 attributes=[
                     NWBAttributeSpec(
-                        name="unit", doc="doc", value="volts", dtype="text"
+                        name="unit", doc="power unit", value="volts", dtype="text"
                     )
                 ],
             ),
@@ -293,40 +293,6 @@ def main():
         ],
     )
 
-    fiber_photometry = NWBGroupSpec(
-        neurodata_type_def='FiberPhotometry',
-        neurodata_type_inc='LabMetaData',
-        name='fiber_photometry',
-        doc='doc',
-        groups=[
-            NWBGroupSpec(
-                name='fibers',
-                neurodata_type_inc='FibersTable',
-                doc='doc'
-            ),
-            NWBGroupSpec(
-                name='excitation_sources',
-                neurodata_type_inc='ExcitationSourcesTable',
-                doc='doc'
-            ),
-            NWBGroupSpec(
-                name='photodetectors',
-                neurodata_type_inc='PhotodetectorsTable',
-                doc='doc'
-            ),
-            NWBGroupSpec(
-                name='fluorophores',
-                neurodata_type_inc='FluorophoresTable',
-                doc='doc'
-            ),
-            NWBGroupSpec(
-                name='commanded_voltages',
-                neurodata_type_inc='MultiCommandedVoltage',
-                doc='doc'
-            )
-        ]
-    )
-
     fluorophores_table = NWBGroupSpec(
         neurodata_type_def="FluorophoresTable",
         neurodata_type_inc="DynamicTable",
@@ -357,6 +323,40 @@ def main():
                 quantity="?",
             ),
         ],
+    )
+
+    fiber_photometry = NWBGroupSpec(
+        neurodata_type_def='FiberPhotometry',
+        neurodata_type_inc='LabMetaData',
+        name='fiber_photometry',
+        doc='doc',
+        groups=[
+            NWBGroupSpec(
+                name='fibers',
+                neurodata_type_inc='FibersTable',
+                doc='table of fibers used'
+            ),
+            NWBGroupSpec(
+                name='excitation_sources',
+                neurodata_type_inc='ExcitationSourcesTable',
+                doc='table of excitation sources used'
+            ),
+            NWBGroupSpec(
+                name='photodetectors',
+                neurodata_type_inc='PhotodetectorsTable',
+                doc='table of photodetectors used'
+            ),
+            NWBGroupSpec(
+                name='fluorophores',
+                neurodata_type_inc='FluorophoresTable',
+                doc='table of fluorophores used'
+            ),
+            NWBGroupSpec(
+                name='commanded_voltages',
+                neurodata_type_inc='MultiCommandedVoltage',
+                doc='multiple commanded voltage container'
+            )
+        ]
     )
 
     # TODO: add all of your new data types to this list

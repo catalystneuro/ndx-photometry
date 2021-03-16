@@ -1,4 +1,3 @@
-import os
 import warnings
 
 from pynwb import get_class
@@ -39,7 +38,9 @@ from pynwb.core import VectorIndex
         allow_extra=True)
 def add_fiber(self, **kwargs):
     """
-    Add a row to this table
+    Add a row per fiber to the fibers table
+    Checks to see if the tables are properly referenced
+    If not, gets their references from the nwbfile
     """
     super(FibersTable, self).add_row(**kwargs)
     referenced_tables = ('excitation_sources','photodetectors','fluorophores')
@@ -50,6 +51,7 @@ def add_fiber(self, **kwargs):
             col.table = getattr(nwbfile.lab_meta_data['fiber_photometry'],table)
             if col.table is None:
                 warnings.warn(f'Reference to {table} that does not yet exist')
+
 
 FibersTable = get_class('FibersTable','ndx-photometry')
 FibersTable.add_fiber = add_fiber
