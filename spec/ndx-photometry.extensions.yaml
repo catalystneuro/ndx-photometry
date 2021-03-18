@@ -62,7 +62,7 @@ groups:
     - name: unit
       dtype: text
       value: nanometers
-      doc: ''
+      doc: wavelength unit
   - name: type
     neurodata_type_inc: VectorData
     dtype: text
@@ -97,7 +97,7 @@ groups:
     - name: unit
       dtype: text
       value: nanometers
-      doc: doc
+      doc: wavelength unit
   - name: source_type
     neurodata_type_inc: VectorData
     dtype: text
@@ -185,7 +185,7 @@ groups:
 - neurodata_type_def: FiberPhotometry
   neurodata_type_inc: LabMetaData
   name: fiber_photometry
-  doc: doc
+  doc: all Fiber Photometry metadata
   groups:
   - name: fibers
     neurodata_type_inc: FibersTable

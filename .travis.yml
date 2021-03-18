@@ -3,7 +3,6 @@ python:
   - "3.8"
 # command to install dependencies
 install:
-  - python src/pynwb/ndx_photometry/__init__.py
   - pip install -e .
 # command to run tests
 script:

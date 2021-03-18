@@ -129,7 +129,7 @@ def main():
                 neurodata_type_inc="VectorData",
                 attributes=[
                     NWBAttributeSpec(
-                        name="unit", doc="", value="nanometers", dtype="text"
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
                     )
                 ],
             ),
@@ -172,7 +172,7 @@ def main():
                 neurodata_type_inc="VectorData",
                 attributes=[
                     NWBAttributeSpec(
-                        name="unit", doc="doc", value="nanometers", dtype="text"
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
                     )
                 ],
             ),
@@ -329,7 +329,7 @@ def main():
         neurodata_type_def='FiberPhotometry',
         neurodata_type_inc='LabMetaData',
         name='fiber_photometry',
-        doc='doc',
+        doc='all Fiber Photometry metadata',
         groups=[
             NWBGroupSpec(
                 name='fibers',
