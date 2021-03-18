@@ -31,7 +31,9 @@ setup_args = {
     'url': 'https://github.com/akshay-jaggi/ndx-photometry',
     'license': 'BSD 3-Clause',
     'install_requires': [
-        'pynwb>=1.3.0'
+        'pynwb>=1.3.0',
+        'numpy<1.19.4',
+        'hdmf_docutils'
     ],
     'packages': find_packages('src/pynwb'),
     'package_dir': {'': 'src/pynwb'},
