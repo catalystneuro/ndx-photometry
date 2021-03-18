@@ -70,7 +70,6 @@ class TestIntegrationRoundtrip(TestCase):
             )
         )
 
-        ExcitationSourcesTable()
         excitationsources_table = ExcitationSourcesTable(
             description="excitation sources table"
         )
