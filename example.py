@@ -116,7 +116,7 @@ roi_response_series = RoiResponseSeries(
     rois=fibers_ref,
 )
 
-# This is your processed data 
+# This is your processed data
 deconv_roi_response_series = DeconvolvedRoiResponseSeries(
     name="deconvolved_fluorescence_trace",
     description="my roi response series",
