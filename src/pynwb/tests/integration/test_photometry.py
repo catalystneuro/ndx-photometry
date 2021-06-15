@@ -60,7 +60,7 @@ class TestIntegrationRoundtrip(TestCase):
             )
         )
 
-        cmmandedvoltage_series2 = (
+        commandedvoltage_series2 = (
             multi_commanded_voltage.create_commanded_voltage_series(
                 name="commanded_voltage2",
                 data=[1.0, 2.0, 3.0],

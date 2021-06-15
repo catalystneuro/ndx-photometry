@@ -80,7 +80,7 @@ groups:
     dtype: text
     shape:
     - null
-    doc: model number of the photodector
+    doc: model number of the photodetector
     quantity: '?'
 - neurodata_type_def: ExcitationSourcesTable
   neurodata_type_inc: DynamicTable
