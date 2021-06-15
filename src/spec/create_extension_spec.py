@@ -149,7 +149,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name="model_number",
-                doc="model number of the photodector",
+                doc="model number of the photodetector",
                 dtype="text",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
