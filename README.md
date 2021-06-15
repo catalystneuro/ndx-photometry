@@ -1,4 +1,6 @@
 # ndx-photometry Extension for NWB
+[![Build Status](https://travis-ci.com/akshay-jaggi/ndx-photometry.svg?branch=master)](https://travis-ci.com/akshay-jaggi/ndx-photometry)
+[![Documentation Status](https://readthedocs.org/projects/ndx-photometry/badge/?version=latest)](https://ndx-photometry.readthedocs.io/en/latest/?badge=latest)
 
 ## Introduction
 This is an NWB extension for storing photometry recordings and associated metadata. This extension stores photometry information across three folders in the NWB file: acquisition, processing, and general. The acquisiton folder contains an ROIResponseSeries (inherited from `pynwb.ophys`), which references rows of a FibersTable rather than 2 Photon ROIs. The new types for this extension are in metadata and processing
