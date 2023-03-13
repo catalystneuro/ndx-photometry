@@ -127,6 +127,7 @@ def main():
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
+                quantity="?",
                 attributes=[
                     NWBAttributeSpec(
                         name="unit", doc="wavelength unit", value="nanometers", dtype="text"
@@ -146,6 +147,7 @@ def main():
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
+                quantity="?",
             ),
             NWBDatasetSpec(
                 name="model_number",
@@ -191,6 +193,7 @@ def main():
                 ),
                 shape=(None,),
                 neurodata_type_inc="VectorData",
+                quantity="?",
             ),
             NWBDatasetSpec(
                 name="output",
@@ -236,6 +239,7 @@ def main():
                         name="unit", doc="frequency unit", value="hertz", dtype="text"
                     )
                 ],
+                quantity="?",
             ),
             NWBDatasetSpec(
                 name="power",
@@ -354,7 +358,8 @@ def main():
             NWBGroupSpec(
                 name='commanded_voltages',
                 neurodata_type_inc='MultiCommandedVoltage',
-                doc='multiple commanded voltage container'
+                doc='multiple commanded voltage container',
+                quantity="?",
             )
         ]
     )
