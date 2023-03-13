@@ -69,6 +69,7 @@ commandedvoltage_series = (
         frequency=30.0,
         power=500.0,
         rate=30.0,
+        unit="volts",
     )
 )
 
