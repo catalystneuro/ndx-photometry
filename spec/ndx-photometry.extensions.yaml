@@ -58,6 +58,7 @@ groups:
     shape:
     - null
     doc: peak wavelength of photodetector
+    quantity: '?'
     attributes:
     - name: unit
       dtype: text
@@ -75,6 +76,7 @@ groups:
     shape:
     - null
     doc: gain on the photodetector
+    quantity: '?'
   - name: model_number
     neurodata_type_inc: VectorData
     dtype: text
@@ -112,6 +114,7 @@ groups:
     shape:
     - null
     doc: references CommandedVoltageSeries
+    quantity: '?'
   - name: output
     neurodata_type_inc: VectorData
     dtype: float
@@ -143,6 +146,7 @@ groups:
   - name: frequency
     dtype: float
     doc: voltage frequency in unit hertz
+    quantity: '?'
     attributes:
     - name: unit
       dtype: text
@@ -202,6 +206,7 @@ groups:
   - name: commanded_voltages
     neurodata_type_inc: MultiCommandedVoltage
     doc: multiple commanded voltage container
+    quantity: '?'
 - neurodata_type_def: FluorophoresTable
   neurodata_type_inc: DynamicTable
   name: fluorophores

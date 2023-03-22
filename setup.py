@@ -22,7 +22,7 @@ except Exception:
 
 setup_args = {
     'name': 'ndx-photometry',
-    'version': '0.1.0',
+    'version': '0.1.1',
     'description': 'extension for fiber photometry data',
     'long_description': readme,
     'long_description_content_type': readme_type,
@@ -33,7 +33,7 @@ setup_args = {
     'install_requires': [
         'pynwb>=1.3.0',
         'numpy<1.19.4',
-        'h5py<3'
+        'h5py',
     ],
     'packages': find_packages('src/pynwb'),
     'package_dir': {'': 'src/pynwb'},

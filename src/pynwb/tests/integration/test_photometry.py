@@ -63,10 +63,10 @@ class TestIntegrationRoundtrip(TestCase):
         commandedvoltage_series2 = (
             multi_commanded_voltage.create_commanded_voltage_series(
                 name="commanded_voltage2",
-                data=[1.0, 2.0, 3.0],
-                frequency=30.0,
-                power=500.0,
+                data=[4.0, 5.0, 6.0],
+                power=400.0,
                 rate=30.0,
+                unit="volts",
             )
         )
 
@@ -102,7 +102,7 @@ class TestIntegrationRoundtrip(TestCase):
             name="roi_response_series",
             description="my roi response series",
             data=np.random.randn(100, 1),
-            unit = 'F',
+            unit='F',
             rate=30.0,
             rois=fibers_ref,
         )
