@@ -32,7 +32,7 @@ setup_args = {
     'license': 'BSD 3-Clause',
     'install_requires': [
         'pynwb>=1.3.0',
-        'numpy<1.19.4',
+        'numpy>=1.22.0',
         'h5py',
     ],
     'packages': find_packages('src/pynwb'),
