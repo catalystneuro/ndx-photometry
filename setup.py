@@ -26,9 +26,9 @@ setup_args = {
     'description': 'extension for fiber photometry data',
     'long_description': readme,
     'long_description_content_type': readme_type,
-    'author': 'Akshay Jaggi',
-    'author_email': 'akshay.x.jaggi@gmail.com',
-    'url': 'https://github.com/akshay-jaggi/ndx-photometry',
+    'author': 'Ben Dichter, Akshay Jaggi',
+    'author_email': 'ben.dichter@catalystneuro.com',
+    'url': 'https://github.com/catalystneuro/ndx-photometry',
     'license': 'BSD 3-Clause',
     'install_requires': [
         'pynwb>=1.3.0',
