@@ -57,9 +57,7 @@ nwbfile = NWBFile(
 # You can follow along here: 
 
 # Create a commanded voltage container, this can store one or more commanded voltage series
-multi_commanded_voltage = MultiCommandedVoltage(
-    name="MyMultiCommandedVoltage",
-)
+multi_commanded_voltage = MultiCommandedVoltage()
 
 # Add a commanded voltage series to this container
 commandedvoltage_series = (
