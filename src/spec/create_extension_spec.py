@@ -95,6 +95,7 @@ def main():
                 dtype="text",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
+                quantity="?",
             ),
             NWBDatasetSpec(
                 name="fiber_model_number",

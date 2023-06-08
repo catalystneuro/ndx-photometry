@@ -33,6 +33,7 @@ groups:
     shape:
     - null
     doc: description of fiber
+    quantity: '?'
   - name: fiber_model_number
     neurodata_type_inc: VectorData
     dtype: text
