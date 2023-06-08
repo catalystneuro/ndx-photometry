@@ -136,7 +136,6 @@ class TestIntegrationRoundtrip(TestCase):
             photodetector=0,
             fluorophores=[0],
             location='my location',
-            notes='notes'
         )
 
         self.nwbfile.add_acquisition(roi_response_series)
