@@ -22,7 +22,7 @@ except Exception:
 
 setup_args = {
     'name': 'ndx-photometry',
-    'version': '0.2.0',
+    'version': '0.2.1',
     'description': 'extension for fiber photometry data',
     'long_description': readme,
     'long_description_content_type': readme_type,
