@@ -64,7 +64,7 @@ def main():
                 neurodata_type_inc="VectorData",
             ),
             NWBDatasetSpec(
-                name="excitation_source",
+                name="excitation_sources",
                 doc="references rows of ExcitationSourcesTable",
                 dtype="int",
                 shape=(None,),

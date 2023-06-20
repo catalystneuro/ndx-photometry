@@ -10,7 +10,7 @@ groups:
     shape:
     - null
     doc: location of fiber
-  - name: excitation_source
+  - name: excitation_sources
     neurodata_type_inc: DynamicTableRegion
     dtype: int
     shape:

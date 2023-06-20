@@ -6,10 +6,11 @@ from hdmf.utils import docval
 from pynwb.core import VectorIndex
 
 
-@docval({'name': 'excitation_source',
-         'type': int,
+@docval({'name': 'excitation_sources',
+         'type': 'array_data',
          'doc': 'references rows of ExcitationSourcesTable',
-         'default': None},
+         'default': None,
+         'shape': (None,)},
         {'name': 'photodetector',
          'type': int,
          'doc': 'references rows of PhotodetectorsTable',
