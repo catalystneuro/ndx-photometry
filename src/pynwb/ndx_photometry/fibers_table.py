@@ -6,37 +6,59 @@ from hdmf.utils import docval
 from pynwb.core import VectorIndex
 
 
-@docval({'name': 'excitation_sources',
-         'type': 'array_data',
-         'doc': 'references rows of ExcitationSourcesTable',
-         'default': None,
-         'shape': (None,)},
-        {'name': 'photodetector',
-         'type': int,
-         'doc': 'references rows of PhotodetectorsTable',
-         'default': None},
-        {'name': 'fluorophores',
-         'doc': 'references rows of FluorophoresTable',
-         'type': 'array_data',
-         'default': None,
-         'shape':(None,)},
-        {'name': 'location',
-         'type': str,
-         'doc': 'location of fiber',
-         'default': None},
-        {'name': 'notes',
-         'type': str,
-         'doc': 'description of fiber',
-         'default': None},
-        {'name': 'fiber_model_number',
-         'type': str,
-         'doc': 'fiber model number',
-         'default': None},
-        {'name': 'dichroic_model_number',
-         'type': str,
-         'doc': 'dichroic model number',
-         'default': None},
-        allow_extra=True)
+@docval(
+    {
+        'name': 'excitation_sources',
+        'type': 'array_data',
+        'doc': 'Reference rows of ExcitationSourcesTable',
+        'default': None,
+        'shape': (None,)
+    },
+    # {
+    #     'name': 'excitation_sources_index',
+    #     'type': int,
+    #     'doc': 'Index for reference rows of ExcitationSourcesTable',
+    #     'default': None
+    # },
+    {
+        'name': 'photodetector',
+        'type': int,
+        'doc': 'references rows of PhotodetectorsTable',
+        'default': None
+    },
+    {
+        'name': 'fluorophores',
+        'doc': 'references rows of FluorophoresTable',
+        'type': 'array_data',
+        'default': None,
+        'shape':(None,)
+    },
+    {
+        'name': 'location',
+        'type': str,
+        'doc': 'location of fiber',
+        'default': None
+    },
+    {
+        'name': 'notes',
+        'type': str,
+        'doc': 'description of fiber',
+        'default': None
+    },
+    {
+        'name': 'fiber_model_number',
+        'type': str,
+        'doc': 'fiber model number',
+        'default': None
+    },
+    {
+        'name': 'dichroic_model_number',
+        'type': str,
+        'doc': 'dichroic model number',
+        'default': None
+    },
+    allow_extra=True
+)
 def add_fiber(self, **kwargs):
     """
     Add a row per fiber to the fibers table

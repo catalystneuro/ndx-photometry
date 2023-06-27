@@ -67,8 +67,14 @@ def main():
                 name="excitation_sources",
                 doc="references rows of ExcitationSourcesTable",
                 dtype="int",
-                shape=(None,),
+                shape=(None, None),
                 neurodata_type_inc="DynamicTableRegion",
+            ),
+            NWBDatasetSpec(
+                name='excitation_sources_index',
+                neurodata_type_inc='VectorIndex',
+                doc='VectorIndex for the "excitation_sources" column.',
+                quantity='?',
             ),
             NWBDatasetSpec(
                 name="photodetector",
@@ -80,15 +86,15 @@ def main():
             NWBDatasetSpec(
                 name="fluorophores",
                 doc="references rows of FluorophoresTable",
-                shape=(None,),
+                shape=(None, None),
                 neurodata_type_inc="DynamicTableRegion",
             ),
-            # NWBDatasetSpec(
-            #     name="fluorophores_index",
-            #     doc="indexes fluorophores of FluorophoresTable",
-            #     shape=(None,),
-            #     neurodata_type_inc="VectorIndex",
-            # ),
+            NWBDatasetSpec(
+                name='fluorophores_index',
+                neurodata_type_inc='VectorIndex',
+                doc='VectorIndex for the "fluorophores" column.',
+                quantity='?',
+            ),
             NWBDatasetSpec(
                 name="notes",
                 doc="description of fiber",

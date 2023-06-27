@@ -15,7 +15,12 @@ groups:
     dtype: int
     shape:
     - null
+    - null
     doc: references rows of ExcitationSourcesTable
+  - name: excitation_sources_index
+    neurodata_type_inc: VectorIndex
+    doc: VectorIndex for the "excitation_sources" column.
+    quantity: '?'
   - name: photodetector
     neurodata_type_inc: DynamicTableRegion
     dtype: int
@@ -26,7 +31,12 @@ groups:
     neurodata_type_inc: DynamicTableRegion
     shape:
     - null
+    - null
     doc: references rows of FluorophoresTable
+  - name: fluorophores_index
+    neurodata_type_inc: VectorIndex
+    doc: VectorIndex for the "fluorophores" column.
+    quantity: '?'
   - name: notes
     neurodata_type_inc: VectorData
     dtype: text
