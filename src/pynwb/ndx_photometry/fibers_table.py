@@ -14,12 +14,6 @@ from pynwb.core import VectorIndex
         'default': None,
         'shape': (None,)
     },
-    # {
-    #     'name': 'excitation_sources_index',
-    #     'type': int,
-    #     'doc': 'Index for reference rows of ExcitationSourcesTable',
-    #     'default': None
-    # },
     {
         'name': 'photodetector',
         'type': int,
