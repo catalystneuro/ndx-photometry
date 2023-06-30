@@ -67,7 +67,7 @@ def main():
                 name="excitation_sources",
                 doc="references rows of ExcitationSourcesTable",
                 dtype="int",
-                shape=(None, None),
+                shape=(None,),
                 neurodata_type_inc="DynamicTableRegion",
             ),
             NWBDatasetSpec(
@@ -86,7 +86,7 @@ def main():
             NWBDatasetSpec(
                 name="fluorophores",
                 doc="references rows of FluorophoresTable",
-                shape=(None, None),
+                shape=(None,),
                 neurodata_type_inc="DynamicTableRegion",
             ),
             NWBDatasetSpec(

@@ -15,7 +15,6 @@ groups:
     dtype: int
     shape:
     - null
-    - null
     doc: references rows of ExcitationSourcesTable
   - name: excitation_sources_index
     neurodata_type_inc: VectorIndex
@@ -30,7 +29,6 @@ groups:
   - name: fluorophores
     neurodata_type_inc: DynamicTableRegion
     shape:
-    - null
     - null
     doc: references rows of FluorophoresTable
   - name: fluorophores_index
