@@ -371,7 +371,38 @@ def main():
         ]
     )
 
-    # TODO: add all of your new data types to this list
+
+    fiberphotometryresponse_series = NWBGroupSpec(
+        neurodata_type_def="FiberPhotometryResponseSeries",
+        neurodata_type_inc="TimeSeries",
+        doc="Extends TimeSeries to hold Fiber Photometry data",
+        datasets=[
+            NWBDatasetSpec(
+                name="fiber",
+                doc="references row of FibersTable",
+                dtype="int",
+                neurodata_type_inc="DynamicTableRegion",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="excitation_source",
+                doc="references row of ExcitationSourcesTable",
+                dtype="int",
+                neurodata_type_inc="DynamicTableRegion",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="fluorophore",
+                doc="references row of FluorophoresTable",
+                dtype="int",
+                neurodata_type_inc="DynamicTableRegion",
+                quantity="?",
+            ),
+        ]
+    )
+
+
+    # Add all new data types to this list
     new_data_types = [
         fibers_table,
         photodetectors_table,
@@ -380,7 +411,8 @@ def main():
         deconvolvedroiresponse_series,
         multi_commanded_voltage,
         fiber_photometry,
-        fluorophores_table
+        fluorophores_table,
+        fiberphotometryresponse_series
     ]
 
     # export the spec to yaml files in the spec folder

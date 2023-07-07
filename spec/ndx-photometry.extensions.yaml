@@ -242,3 +242,22 @@ groups:
     - 3
     doc: injection taxonomical coordinates in (AP, ML, Z) in mm relative to Bregma
     quantity: '?'
+- neurodata_type_def: FiberPhotometryResponseSeries
+  neurodata_type_inc: TimeSeries
+  doc: Extends TimeSeries to hold Fiber Photometry data
+  datasets:
+  - name: fiber
+    neurodata_type_inc: DynamicTableRegion
+    dtype: int
+    doc: references row of FibersTable
+    quantity: '?'
+  - name: excitation_source
+    neurodata_type_inc: DynamicTableRegion
+    dtype: int
+    doc: references row of ExcitationSourcesTable
+    quantity: '?'
+  - name: fluorophore
+    neurodata_type_inc: DynamicTableRegion
+    dtype: int
+    doc: references row of FluorophoresTable
+    quantity: '?'

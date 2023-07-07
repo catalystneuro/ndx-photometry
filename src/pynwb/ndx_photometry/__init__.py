@@ -35,7 +35,8 @@ from .fibers_table import FibersTable
     DeconvolvedRoiResponseSeries,
     MultiCommandedVoltage,
     FiberPhotometry,
-    FluorophoresTable
+    FluorophoresTable,
+    FiberPhotometryResponseSeries
 ) = [
     get_class(x, "ndx-photometry")
     for x in (
@@ -45,6 +46,7 @@ from .fibers_table import FibersTable
         "DeconvolvedRoiResponseSeries",
         "MultiCommandedVoltage",
         'FiberPhotometry',
-        "FluorophoresTable"
+        "FluorophoresTable",
+        "FiberPhotometryResponseSeries"
     )
 ]
