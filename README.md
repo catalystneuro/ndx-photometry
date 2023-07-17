@@ -5,10 +5,10 @@
 ![NWB - Photometry](https://user-images.githubusercontent.com/844306/144680873-3e2d957f-97ff-45cb-b625-517f5e7dfb9f.png)
 
 ## Introduction
-This is an NWB extension for storing photometry recordings and associated metadata. This extension stores photometry information across three folders in the NWB file: acquisition, processing, and general. The acquisiton folder contains an ROIResponseSeries (inherited from `pynwb.ophys`), which references rows of a FibersTable rather than 2 Photon ROIs. The new types for this extension are in metadata and processing
+This is an NWB extension for storing photometry recordings and associated metadata. This extension stores photometry information across three folders in the NWB file: acquisition, processing, and general. The acquisiton folder contains a `FiberPhotometryResponseSeries` which references rows of `FibersTable`, `ExcitationSourcesTable` and `FluorophoresTable`. The new types for this extension are in metadata and processing.
 
 ### Metadata
-1. `FibersTable` stores rows for each fiber with information about the location, excitation, source, photodetector, fluorophore, and more (associated with each fiber). 
+1. `FibersTable` stores rows for each fiber with information about the location, photodetector, and more (associated with each fiber). 
 2. `ExcitationSourcesTable` stores rows for each excitation source with information about the peak wavelength, source type, and the commanded voltage series of type `CommandedVoltageSeries`
 3. `PhotodectorsTable` stores rows for each photodetector with information about the peak wavelength, type, etc. 
 4. `FluorophoresTable` stores rows for each fluorophore with information about the fluorophore itself and the injeciton site. 
@@ -43,7 +43,8 @@ from ndx_photometry import (
     DeconvolvedRoiResponseSeries,
     MultiCommandedVoltage,
     FiberPhotometry,
-    FluorophoresTable
+    FluorophoresTable,
+    FiberPhotometryResponseSeries,
 )
 
 
@@ -123,30 +124,44 @@ nwbfile.add_lab_meta_data(
 # Important: we add the fibers to the fibers table _after_ adding the metadata
 # This ensures that we can find this data in their tables of origin
 fibers_table.add_fiber(
-    excitation_source=0, #integers indicated rows of excitation sources table
     photodetector=0,
-    fluorophores=[0], #potentially multiple fluorophores, so list of indices
     location='my location',
     notes='notes'
 )
 
-# Here we set up a list of fibers that our recording came from
-fibers_ref = DynamicTableRegion(
-    name="rois", 
+# Here we set up references to fibers, excitation sources and florophores associated with our recording
+fiber_dtr = DynamicTableRegion(
+    name="fiber",
+    description="Source fiber.",
     data=[0], # potentially multiple fibers
-    description="source fibers", 
-    table=fibers_table
+    table=fibers_table,
+)
+excitation_source_dtr = DynamicTableRegion(
+    name="excitation_source",
+    description="Excitation source.",
+    data=[0],
+    table=excitationsources_table,
+)
+fluorophore_dtr = DynamicTableRegion(
+    name="fluorophore",
+    description="Fluorophore.",
+    data=[0],
+    table=fluorophores_table,
 )
 
-# Create a raw roiresponseseries, this is your main acquisition
-roi_response_series = RoiResponseSeries(
-    name="roi_response_series",
-    description="my roi response series",
+# Create a raw FiberPhotometryResponseSeries, this is your main acquisition
+fiber_photometry_response_series = FiberPhotometryResponseSeries(
+    name="fiber_photometry_response_series",
+    description="my fiber photometry response series",
     data=np.random.randn(100, 1),
-    unit='F',
+    unit="F",
     rate=30.0,
-    rois=fibers_ref,
+    fiber=fiber_dtr,
+    excitation_source=excitation_source_dtr,
+    fluorophore=fluorophore_dtr,
 )
+nwbfile.add_acquisition(response_series)
+
 
 # This is your processed data 
 deconv_roi_response_series = DeconvolvedRoiResponseSeries(
@@ -156,7 +171,7 @@ deconv_roi_response_series = DeconvolvedRoiResponseSeries(
     unit='F',
     rate=30.0,
     rois=fibers_ref,
-    raw=roi_response_series,
+    raw=fiber_photometry_response_series,
 )
 
 ophys_module = nwbfile.create_processing_module(
@@ -164,7 +179,6 @@ ophys_module = nwbfile.create_processing_module(
 )
 
 ophys_module.add(multi_commanded_voltage)
-nwbfile.add_acquisition(roi_response_series)
 ophys_module.add(deconv_roi_response_series)
 
 # write nwb file
@@ -176,7 +190,7 @@ with NWBHDF5IO(filename, 'w') as io:
 with NWBHDF5IO(filename, 'r', load_namespaces=True) as io:
     nwbfile = io.read()
     # Access and print information about the acquisition
-    print(nwbfile.acquisition["roi_response_series"])
+    print(nwbfile.acquisition["fiber_photometry_response_series"])
     # Access and print information about the processed data
     print(nwbfile.processing['ophys']["DeconvolvedRoiResponseSeries"])
     # Access and print all of the metadata
