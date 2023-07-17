@@ -64,36 +64,11 @@ def main():
                 neurodata_type_inc="VectorData",
             ),
             NWBDatasetSpec(
-                name="excitation_sources",
-                doc="references rows of ExcitationSourcesTable",
-                dtype="int",
-                shape=(None,),
-                neurodata_type_inc="DynamicTableRegion",
-            ),
-            NWBDatasetSpec(
-                name='excitation_sources_index',
-                neurodata_type_inc='VectorIndex',
-                doc='VectorIndex for the "excitation_sources" column.',
-                quantity='?',
-            ),
-            NWBDatasetSpec(
                 name="photodetector",
                 doc="references rows of PhotodetectorsTable",
                 dtype="int",
                 shape=(None,),
                 neurodata_type_inc="DynamicTableRegion",
-            ),
-            NWBDatasetSpec(
-                name="fluorophores",
-                doc="references rows of FluorophoresTable",
-                shape=(None,),
-                neurodata_type_inc="DynamicTableRegion",
-            ),
-            NWBDatasetSpec(
-                name='fluorophores_index',
-                neurodata_type_inc='VectorIndex',
-                doc='VectorIndex for the "fluorophores" column.',
-                quantity='?',
             ),
             NWBDatasetSpec(
                 name="notes",

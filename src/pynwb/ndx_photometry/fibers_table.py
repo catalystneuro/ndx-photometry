@@ -8,24 +8,10 @@ from pynwb.core import VectorIndex
 
 @docval(
     {
-        'name': 'excitation_sources',
-        'type': 'array_data',
-        'doc': 'Reference rows of ExcitationSourcesTable',
-        'default': None,
-        'shape': (None,)
-    },
-    {
         'name': 'photodetector',
         'type': int,
         'doc': 'references rows of PhotodetectorsTable',
         'default': None
-    },
-    {
-        'name': 'fluorophores',
-        'doc': 'references rows of FluorophoresTable',
-        'type': 'array_data',
-        'default': None,
-        'shape':(None,)
     },
     {
         'name': 'location',
@@ -60,7 +46,7 @@ def add_fiber(self, **kwargs):
     If not, gets their references from the nwbfile
     """
     super(FibersTable, self).add_row(**kwargs)
-    referenced_tables = ('excitation_sources','photodetectors','fluorophores')
+    referenced_tables = ('photodetectors', )
     for arg, table in zip(kwargs, referenced_tables):
         col = self[arg].target if isinstance(self[arg],VectorIndex) else self[arg]
         if col.table is None:
