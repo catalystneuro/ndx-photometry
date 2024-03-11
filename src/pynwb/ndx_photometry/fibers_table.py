@@ -1,9 +1,43 @@
 import warnings
 
-from pynwb import get_class
+from pynwb import register_class
 
-from hdmf.utils import docval
-from pynwb.core import VectorIndex
+from hdmf.utils import docval, popargs
+from pynwb.core import VectorIndex, DynamicTable
+
+@register_class('FibersTable', 'ndx-photometry')
+class FibersTable(DynamicTable):
+    __columns__ = (
+        {'name': 'location', 'description': 'location of fiber'},
+        {'name': 'excitation_source', 'description': 'references rows of ExcitationSourcesTable', 'table': True},
+        {'name': 'photodetector', 'description': 'references rows of PhotodetectorsTable', 'table': True},
+        {'name': 'fluorophores', 'description': 'references rows of FluorophoresTable', 'table': True},
+        {'name': 'notes', 'description': 'description of fiber'},
+        {'name': 'fiber_model_number', 'description': 'fiber model number'},
+        {'name': 'dichroic_model_number', 'description': 'dichroic model number'}
+    )
+
+    @docval(
+        {'name': 'name', 'type': str, 'doc': 'name of this FibersTable', 'default': 'fibers'},
+        {'name': 'description', 'type': str, 'doc': 'description of this FibersTable'},
+        {'name': 'target_tables', 'type': dict, 'doc': 'the excitation_source, fluorophores, and photodetectors tables that fibers references'},
+    )
+    def __init__(self, **kwargs):
+        name, description, target_tables = popargs('name', 'description', 'target_tables', kwargs)
+        super().__init__(name=name, description=description, target_tables=target_tables)
+
+    @docval(
+        {'name': 'excitation_source', 'type': int, 'doc': 'references rows of ExcitationSourcesTable'},
+        {'name': 'photodetector', 'type': int, 'doc': 'references rows of PhotodetectorsTable'},
+        {'name': 'fluorophores', 'doc': 'references rows of FluorophoresTable', 'type': 'array_data'},
+        {'name': 'location', 'type': str, 'doc': 'location of fiber'},
+        {'name': 'notes', 'type': str, 'doc': 'description of fiber', 'default': None},
+        {'name': 'fiber_model_number', 'type': str, 'doc': 'fiber model number', 'default': None},
+        {'name': 'dichroic_model_number', 'type': str, 'doc': 'dichroic model number', 'default': None},
+        allow_extra=True
+    )
+    def add_row(self, **kwargs):
+        super().add_row(**kwargs)
 
 
 @docval({'name': 'excitation_source',
@@ -53,5 +87,4 @@ def add_fiber(self, **kwargs):
                 warnings.warn(f'Reference to {table} that does not yet exist')
 
 
-FibersTable = get_class('FibersTable','ndx-photometry')
 FibersTable.add_fiber = add_fiber

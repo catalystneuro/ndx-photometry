@@ -50,72 +50,6 @@ def main():
     # TODO: define your new data types
     # see https://pynwb.readthedocs.io/en/latest/extensions.html#extending-nwb
     # for more information
-    fibers_table = NWBGroupSpec(
-        neurodata_type_def="FibersTable",
-        neurodata_type_inc="DynamicTable",
-        name='fibers',
-        doc="Extends DynamicTable to hold various Fibers",
-        datasets=[
-            NWBDatasetSpec(
-                name="location",
-                doc="location of fiber",
-                dtype="text",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-            ),
-            NWBDatasetSpec(
-                name="excitation_source",
-                doc="references rows of ExcitationSourcesTable",
-                dtype="int",
-                shape=(None,),
-                neurodata_type_inc="DynamicTableRegion",
-            ),
-            NWBDatasetSpec(
-                name="photodetector",
-                doc="references rows of PhotodetectorsTable",
-                dtype="int",
-                shape=(None,),
-                neurodata_type_inc="DynamicTableRegion",
-            ),
-            NWBDatasetSpec(
-                name="fluorophores",
-                doc="references rows of FluorophoresTable",
-                shape=(None,),
-                neurodata_type_inc="DynamicTableRegion",
-            ),
-            # NWBDatasetSpec(
-            #     name="fluorophores_index",
-            #     doc="indexes fluorophores of FluorophoresTable",
-            #     shape=(None,),
-            #     neurodata_type_inc="VectorIndex",
-            # ),
-            NWBDatasetSpec(
-                name="notes",
-                doc="description of fiber",
-                dtype="text",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-                quantity="?",
-            ),
-            NWBDatasetSpec(
-                name="fiber_model_number",
-                doc="fiber model number",
-                dtype="text",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-                quantity="?",
-            ),
-            NWBDatasetSpec(
-                name="dichroic_model_number",
-                doc="dichroic model number",
-                dtype="text",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-                quantity="?",
-            ),
-        ],
-    )
-
     photodetectors_table = NWBGroupSpec(
         neurodata_type_def="PhotodetectorsTable",
         neurodata_type_inc="DynamicTable",
@@ -367,7 +301,6 @@ def main():
 
     # TODO: add all of your new data types to this list
     new_data_types = [
-        fibers_table,
         photodetectors_table,
         excitationsources_table,
         commandedvoltage_series,
