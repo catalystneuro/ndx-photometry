@@ -107,7 +107,20 @@ fluorophores_table.add_row(
 )
 
 fibers_table = FibersTable(
-    description="fibers table"
+    description="fibers table",
+    target_tables=dict(
+                excitation_source=excitation_sources_table,
+                photodetector=photodetectors_table,
+                fluorophores=fluorophores_table,
+            ),
+)
+
+fibers_table.add_row(
+    excitation_source=0, #integers indicated rows of excitation sources table
+    photodetector=0,
+    fluorophores=[0], #potentially multiple fluorophores, so list of indices
+    location='my location',
+    notes='notes'
 )
 
 # Here we add the metadata tables to the metadata section
@@ -118,16 +131,6 @@ nwbfile.add_lab_meta_data(
         photodetectors=photodetectors_table,
         fluorophores=fluorophores_table
     )
-)
-
-# Important: we add the fibers to the fibers table _after_ adding the metadata
-# This ensures that we can find this data in their tables of origin
-fibers_table.add_fiber(
-    excitation_source=0, #integers indicated rows of excitation sources table
-    photodetector=0,
-    fluorophores=[0], #potentially multiple fluorophores, so list of indices
-    location='my location',
-    notes='notes'
 )
 
 # Here we set up a list of fibers that our recording came from
