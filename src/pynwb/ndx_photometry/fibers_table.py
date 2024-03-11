@@ -75,7 +75,15 @@ def add_fiber(self, **kwargs):
     Add a row per fiber to the fibers table
     Checks to see if the tables are properly referenced
     If not, gets their references from the nwbfile
+
+    This implementation is for legacy purposes and is not recommended for use.
+    Please use the add_row method instead.
     """
+    deprecation_message = """
+        This method is being deprecated on or after October 2024 in favor of the add_row method.
+        Please use the add_row method instead.
+        """
+    warnings.warn(deprecation_message, category=FutureWarning)
     super(FibersTable, self).add_row(**kwargs)
     referenced_tables = ('excitation_sources','photodetectors','fluorophores')
     for arg, table in zip(kwargs, referenced_tables):
