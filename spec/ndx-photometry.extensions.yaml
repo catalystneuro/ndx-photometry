@@ -10,12 +10,6 @@ groups:
     shape:
     - null
     doc: location of fiber
-  - name: photodetector
-    neurodata_type_inc: DynamicTableRegion
-    dtype: int
-    shape:
-    - null
-    doc: references rows of PhotodetectorsTable
   - name: notes
     neurodata_type_inc: VectorData
     dtype: text
@@ -241,4 +235,9 @@ groups:
     neurodata_type_inc: DynamicTableRegion
     dtype: int
     doc: references row of FluorophoresTable
+    quantity: '?'
+  - name: photodetector
+    neurodata_type_inc: DynamicTableRegion
+    dtype: int
+    doc: references row of PhotodetectorsTable
     quantity: '?'
