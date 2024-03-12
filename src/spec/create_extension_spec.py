@@ -64,13 +64,6 @@ def main():
                 neurodata_type_inc="VectorData",
             ),
             NWBDatasetSpec(
-                name="photodetector",
-                doc="references rows of PhotodetectorsTable",
-                dtype="int",
-                shape=(None,),
-                neurodata_type_inc="DynamicTableRegion",
-            ),
-            NWBDatasetSpec(
                 name="notes",
                 doc="description of fiber",
                 dtype="text",
@@ -346,7 +339,6 @@ def main():
         ]
     )
 
-
     fiberphotometryresponse_series = NWBGroupSpec(
         neurodata_type_def="FiberPhotometryResponseSeries",
         neurodata_type_inc="TimeSeries",
@@ -373,9 +365,15 @@ def main():
                 neurodata_type_inc="DynamicTableRegion",
                 quantity="?",
             ),
+            NWBDatasetSpec(
+                name="photodetector",
+                doc="references row of PhotodetectorsTable",
+                dtype="int",
+                neurodata_type_inc="DynamicTableRegion",
+                quantity="?",
+            ),
         ]
     )
-
 
     # Add all new data types to this list
     new_data_types = [

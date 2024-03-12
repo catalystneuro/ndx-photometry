@@ -48,7 +48,7 @@ def add_fiber(self, **kwargs):
     super(FibersTable, self).add_row(**kwargs)
     referenced_tables = ('photodetectors', )
     for arg, table in zip(kwargs, referenced_tables):
-        col = self[arg].target if isinstance(self[arg],VectorIndex) else self[arg]
+        col = self[arg].target if isinstance(self[arg], VectorIndex) else self[arg]
         if col.table is None:
             nwbfile = self.get_ancestor(data_type='NWBFile')
             col.table = getattr(nwbfile.lab_meta_data['fiber_photometry'],table)
@@ -56,5 +56,5 @@ def add_fiber(self, **kwargs):
                 warnings.warn(f'Reference to {table} that does not yet exist')
 
 
-FibersTable = get_class('FibersTable','ndx-photometry')
+FibersTable = get_class('FibersTable', 'ndx-photometry')
 FibersTable.add_fiber = add_fiber
