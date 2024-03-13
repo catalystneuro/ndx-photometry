@@ -347,28 +347,24 @@ def main():
             NWBDatasetSpec(
                 name="fiber",
                 doc="references row of FibersTable",
-                dtype="int",
                 neurodata_type_inc="DynamicTableRegion",
                 quantity="?",
             ),
             NWBDatasetSpec(
                 name="excitation_source",
                 doc="references row of ExcitationSourcesTable",
-                dtype="int",
                 neurodata_type_inc="DynamicTableRegion",
                 quantity="?",
             ),
             NWBDatasetSpec(
                 name="fluorophore",
                 doc="references row of FluorophoresTable",
-                dtype="int",
                 neurodata_type_inc="DynamicTableRegion",
                 quantity="?",
             ),
             NWBDatasetSpec(
                 name="photodetector",
                 doc="references row of PhotodetectorsTable",
-                dtype="int",
                 neurodata_type_inc="DynamicTableRegion",
                 quantity="?",
             ),

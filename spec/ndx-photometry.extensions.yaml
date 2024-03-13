@@ -223,21 +223,17 @@ groups:
   datasets:
   - name: fiber
     neurodata_type_inc: DynamicTableRegion
-    dtype: int
     doc: references row of FibersTable
     quantity: '?'
   - name: excitation_source
     neurodata_type_inc: DynamicTableRegion
-    dtype: int
     doc: references row of ExcitationSourcesTable
     quantity: '?'
   - name: fluorophore
     neurodata_type_inc: DynamicTableRegion
-    dtype: int
     doc: references row of FluorophoresTable
     quantity: '?'
   - name: photodetector
     neurodata_type_inc: DynamicTableRegion
-    dtype: int
     doc: references row of PhotodetectorsTable
     quantity: '?'
