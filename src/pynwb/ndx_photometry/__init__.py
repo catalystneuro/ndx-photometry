@@ -24,9 +24,6 @@ if not os.path.exists(ndx_photometry_specpath):
 load_namespaces(ndx_photometry_specpath)
 
 # TODO: import your classes here or define your class using get_class to make
-
-from .fibers_table import FibersTable
-
 # them accessible at the package level
 (
     CommandedVoltageSeries,
@@ -36,7 +33,8 @@ from .fibers_table import FibersTable
     MultiCommandedVoltage,
     FiberPhotometry,
     FluorophoresTable,
-    FiberPhotometryResponseSeries
+    FiberPhotometryResponseSeries,
+    FibersTable
 ) = [
     get_class(x, "ndx-photometry")
     for x in (
@@ -47,6 +45,7 @@ from .fibers_table import FibersTable
         "MultiCommandedVoltage",
         'FiberPhotometry',
         "FluorophoresTable",
-        "FiberPhotometryResponseSeries"
+        "FiberPhotometryResponseSeries",
+        'FibersTable'
     )
 ]
