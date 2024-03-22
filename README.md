@@ -5,7 +5,7 @@
 ![NWB - Photometry](https://user-images.githubusercontent.com/844306/144680873-3e2d957f-97ff-45cb-b625-517f5e7dfb9f.png)
 
 ## Introduction
-This is an NWB extension for storing photometry recordings and associated metadata. This extension stores photometry information across three folders in the NWB file: acquisition, processing, and general. The acquisiton folder contains a `FiberPhotometryResponseSeries` which references rows of `FibersTable`, `ExcitationSourcesTable` and `FluorophoresTable`. The new types for this extension are in metadata and processing.
+This is an NWB extension for storing photometry recordings and associated metadata. This extension stores photometry information across three folders in the NWB file: acquisition, processing, and general. The acquisiton folder contains a `FiberPhotometryResponseSeries` which references rows of `FibersTable`, `ExcitationSourcesTable`, `PhotodetectorsTable` and `FluorophoresTable`. The new types for this extension are in metadata and processing.
 
 ### Metadata
 1. `FibersTable` stores rows for each fiber with information about the location, photodetector, and more (associated with each fiber).
@@ -34,7 +34,6 @@ import datetime
 import numpy as np
 
 from pynwb import NWBHDF5IO, NWBFile
-from pynwb.core import DynamicTableRegion
 from pynwb.ophys import RoiResponseSeries
 from ndx_photometry import (
     FibersTable,
@@ -94,39 +93,20 @@ nwbfile.add_lab_meta_data(
 
 # Create a raw FiberPhotometryResponseSeries, this is your main acquisition
 # We should create DynamicTableRegion referencing the correct rows for each table
-fiber_ref = DynamicTableRegion(
-    name="fiber",
-    description="source fiber",
-    data=[0],
-    table=fibers_table
-)
-excitation_ref = DynamicTableRegion(
-    name="excitation_source",
-    description="excitation sources",
-    data=[0],
-    table=excitationsources_table
-)
-photodetector_ref = DynamicTableRegion(
-    name="photodetector",
-    description="photodetector",
-    data=[0],
-    table=excitationsources_table
-)
-fluorophore_ref = DynamicTableRegion(
-    name="fluorophore",
-    description="fluorophore",
-    data=[0],
-    table=fluorophores_table
-)
+fiber_ref = fibers_table.create_fiber_region(region=[0], description='source fiber')
+excitation_ref = excitationsources_table.create_excitation_source_region(region=[0], description='excitation sources')
+photodetector_ref = photodetectors_table.create_photodetector_region(region=[0], description='photodetector')
+fluorophore_ref = fluorophores_table.create_fluorophore_region(region=[0], description='fluorophore')
+
 fp_response_series = FiberPhotometryResponseSeries(
     name="MyFPRecording",
     data=np.random.randn(100, 1),
     unit='F',
     rate=30.0,
-    fiber=fiber_ref,
-    excitation_source=excitation_ref,
-    photodetector=photodetector_ref,
-    fluorophore=fluorophore_ref,
+    fibers=fiber_ref,
+    excitation_sources=excitation_ref,
+    photodetectors=photodetector_ref,
+    fluorophores=fluorophore_ref,
 )
 
 nwbfile.add_acquisition(fp_response_series)
