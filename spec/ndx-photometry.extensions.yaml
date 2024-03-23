@@ -221,19 +221,19 @@ groups:
   neurodata_type_inc: TimeSeries
   doc: Extends TimeSeries to hold Fiber Photometry data
   datasets:
-  - name: fiber
+  - name: fibers
     neurodata_type_inc: DynamicTableRegion
-    doc: references row of FibersTable
+    doc: references row(s) of FibersTable
     quantity: '?'
-  - name: excitation_source
+  - name: excitation_sources
     neurodata_type_inc: DynamicTableRegion
-    doc: references row of ExcitationSourcesTable
+    doc: references row(s) of ExcitationSourcesTable
     quantity: '?'
-  - name: fluorophore
+  - name: fluorophores
     neurodata_type_inc: DynamicTableRegion
-    doc: references row of FluorophoresTable
+    doc: references row(s) of FluorophoresTable
     quantity: '?'
-  - name: photodetector
+  - name: photodetectors
     neurodata_type_inc: DynamicTableRegion
-    doc: references row of PhotodetectorsTable
+    doc: references row(s) of PhotodetectorsTable
     quantity: '?'
