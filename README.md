@@ -78,7 +78,9 @@ fluorophores_table = FluorophoresTable(description="fluorophores")
 fluorophores_table.add_row(
     label="dlight",
     location="VTA",
-    coordinates=(3.0,2.0,1.0)
+    coordinates=(3.0,2.0,1.0),
+    excitation_lambda=700.0,
+    emission_lambda=500.0
 )
 
 # Here we add the metadata tables to the metadata section
