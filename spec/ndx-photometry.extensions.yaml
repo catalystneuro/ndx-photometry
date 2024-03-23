@@ -10,6 +10,15 @@ groups:
     shape:
     - null
     doc: location of fiber
+  - name: coordinates
+    neurodata_type_inc: VectorData
+    dtype: float
+    shape:
+    - null
+    - 3
+    doc: Fiber placement taxonomical coordinates in (AP, ML, Z) in mm relative to
+      Bregma
+    quantity: '?'
   - name: notes
     neurodata_type_inc: VectorData
     dtype: text

@@ -64,6 +64,14 @@ def main():
                 neurodata_type_inc="VectorData",
             ),
             NWBDatasetSpec(
+                name="coordinates",
+                doc="Fiber placement taxonomical coordinates in (AP, ML, Z) in mm relative to Bregma",
+                dtype="float",
+                shape=(None, 3),
+                neurodata_type_inc="VectorData",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
                 name="notes",
                 doc="description of fiber",
                 dtype="text",
