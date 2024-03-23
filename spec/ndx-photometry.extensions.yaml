@@ -153,9 +153,9 @@ groups:
       dtype: text
       value: volts
       doc: power unit
-- neurodata_type_def: DeconvolvedRoiResponseSeries
-  neurodata_type_inc: RoiResponseSeries
-  doc: Extends RoiResponseSeries to hold deconvolved data
+- neurodata_type_def: DeconvolvedFiberPhotometryResponseSeries
+  neurodata_type_inc: FiberPhotometryResponseSeries
+  doc: Extends FiberPhotometryResponseSeries to hold deconvolved data
   datasets:
   - name: deconvolution_filter
     neurodata_type_inc: VectorData
@@ -169,8 +169,8 @@ groups:
     quantity: '?'
   links:
   - name: raw
-    target_type: RoiResponseSeries
-    doc: ref to roi response series
+    target_type: FiberPhotometryResponseSeries
+    doc: ref to fiber photometry response series
 - neurodata_type_def: MultiCommandedVoltage
   neurodata_type_inc: NWBDataInterface
   name: commanded_voltages

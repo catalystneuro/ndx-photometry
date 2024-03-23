@@ -251,35 +251,6 @@ def main():
         ],
     )
 
-    deconvolvedroiresponse_series = NWBGroupSpec(
-        neurodata_type_def="DeconvolvedRoiResponseSeries",
-        neurodata_type_inc="RoiResponseSeries",
-        doc="Extends RoiResponseSeries to hold deconvolved data",
-        links=[
-            NWBLinkSpec(
-                name="raw",
-                target_type="RoiResponseSeries",
-                doc="ref to roi response series",
-            )
-        ],
-        datasets=[
-            NWBDatasetSpec(
-                name="deconvolution_filter",
-                doc="description of deconvolution filter used",
-                dtype="text",
-                neurodata_type_inc="VectorData",
-                quantity="?",
-            ),
-            NWBDatasetSpec(
-                name="downsampling_filter",
-                doc="description of downsampling filter used",
-                dtype="text",
-                neurodata_type_inc="VectorData",
-                quantity="?",
-            ),
-        ],
-    )
-
     fluorophores_table = NWBGroupSpec(
         neurodata_type_def="FluorophoresTable",
         neurodata_type_inc="DynamicTable",
@@ -403,13 +374,42 @@ def main():
         ]
     )
 
+    deconvolved_fiberphotometryresponse_series_series = NWBGroupSpec(
+        neurodata_type_def="DeconvolvedFiberPhotometryResponseSeries",
+        neurodata_type_inc="FiberPhotometryResponseSeries",
+        doc="Extends FiberPhotometryResponseSeries to hold deconvolved data",
+        links=[
+            NWBLinkSpec(
+                name="raw",
+                target_type="FiberPhotometryResponseSeries",
+                doc="ref to fiber photometry response series",
+            )
+        ],
+        datasets=[
+            NWBDatasetSpec(
+                name="deconvolution_filter",
+                doc="description of deconvolution filter used",
+                dtype="text",
+                neurodata_type_inc="VectorData",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="downsampling_filter",
+                doc="description of downsampling filter used",
+                dtype="text",
+                neurodata_type_inc="VectorData",
+                quantity="?",
+            ),
+        ],
+    )
+
     # Add all new data types to this list
     new_data_types = [
         fibers_table,
         photodetectors_table,
         excitationsources_table,
         commandedvoltage_series,
-        deconvolvedroiresponse_series,
+        deconvolved_fiberphotometryresponse_series_series,
         multi_commanded_voltage,
         fiber_photometry,
         fluorophores_table,
