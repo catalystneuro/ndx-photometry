@@ -297,9 +297,33 @@ def main():
                 name="coordinates",
                 doc="injection taxonomical coordinates in (AP, ML, Z) in mm relative to Bregma",
                 dtype="float",
-                shape=(None,3),
+                shape=(None, 3),
                 neurodata_type_inc="VectorData",
                 quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="emission_lambda",
+                doc="Emission wavelength of the fluorophore, in nanometers.",
+                dtype="float",
+                shape=(None,),
+                neurodata_type_inc="VectorData",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="excitation_lambda",
+                doc="Excitation wavelength of the fluorophore, in nanometers.",
+                dtype="float",
+                shape=(None,),
+                neurodata_type_inc="VectorData",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
+                    )
+                ],
             ),
         ],
     )

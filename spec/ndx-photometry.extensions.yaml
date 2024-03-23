@@ -217,6 +217,28 @@ groups:
     - 3
     doc: injection taxonomical coordinates in (AP, ML, Z) in mm relative to Bregma
     quantity: '?'
+  - name: emission_lambda
+    neurodata_type_inc: VectorData
+    dtype: float
+    shape:
+    - null
+    doc: Emission wavelength of the fluorophore, in nanometers.
+    attributes:
+    - name: unit
+      dtype: text
+      value: nanometers
+      doc: wavelength unit
+  - name: excitation_lambda
+    neurodata_type_inc: VectorData
+    dtype: float
+    shape:
+    - null
+    doc: Excitation wavelength of the fluorophore, in nanometers.
+    attributes:
+    - name: unit
+      dtype: text
+      value: nanometers
+      doc: wavelength unit
 - neurodata_type_def: FiberPhotometryResponseSeries
   neurodata_type_inc: TimeSeries
   doc: Extends TimeSeries to hold Fiber Photometry data
