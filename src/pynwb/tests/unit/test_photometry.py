@@ -9,7 +9,7 @@ from ndx_photometry import (
     FibersTable,
     PhotodetectorsTable,
     ExcitationSourcesTable,
-    DeconvolvedRoiResponseSeries,
+    DeconvolvedFiberPhotometryResponseSeries,
     MultiCommandedVoltage,
     FiberPhotometry,
     FluorophoresTable

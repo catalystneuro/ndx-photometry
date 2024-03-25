@@ -8,7 +8,7 @@ from ndx_photometry import (
     FibersTable,
     PhotodetectorsTable,
     ExcitationSourcesTable,
-    DeconvolvedRoiResponseSeries,
+    DeconvolvedFiberPhotometryResponseSeries,
     MultiCommandedVoltage,
     FiberPhotometry,
     FluorophoresTable
@@ -22,7 +22,7 @@ nwbfile = NWBFile(
 )
 
 # In the next ten calls or so, we'll set up the metadata from the bottom of the metadata tree up
-# You can follow along here: 
+# You can follow along here:
 
 # Create a commanded voltage container, this can store one or more commanded voltage series
 multi_commanded_voltage = MultiCommandedVoltage()
@@ -57,8 +57,8 @@ photodetectors_table = PhotodetectorsTable(
 
 # Add one row to the table per photodetector
 photodetectors_table.add_row(
-    peak_wavelength=500.0, 
-    type="PMT", 
+    peak_wavelength=500.0,
+    type="PMT",
     gain=100.0
 )
 
@@ -100,9 +100,9 @@ fibers_table.add_fiber(
 
 # Here we set up a list of fibers that our recording came from
 fibers_ref = DynamicTableRegion(
-    name="rois", 
+    name="rois",
     data=[0], # potentially multiple fibers
-    description="source fibers", 
+    description="source fibers",
     table=fibers_table
 )
 
@@ -117,7 +117,7 @@ roi_response_series = RoiResponseSeries(
 )
 
 # This is your processed data
-deconv_roi_response_series = DeconvolvedRoiResponseSeries(
+deconv_roi_response_series = DeconvolvedFiberPhotometryResponseSeries(
     name="deconvolved_fluorescence_trace",
     description="my roi response series",
     data=np.random.randn(100, 1),
@@ -139,7 +139,7 @@ ophys_module.add(deconv_roi_response_series)
 filename = 'test.nwb'
 with NWBHDF5IO(filename, 'w') as io:
     io.write(nwbfile)
-    
+
 # read nwb file and check its contents
 with NWBHDF5IO(filename, 'r', load_namespaces=True) as io:
     nwbfile = io.read()

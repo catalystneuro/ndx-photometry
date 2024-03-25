@@ -28,7 +28,7 @@ load_namespaces(ndx_photometry_specpath)
 from .photometry import FibersTable, FluorophoresTable, PhotodetectorsTable, ExcitationSourcesTable
 (
     CommandedVoltageSeries,
-    DeconvolvedRoiResponseSeries,
+    DeconvolvedFiberPhotometryResponseSeries,
     MultiCommandedVoltage,
     FiberPhotometry,
     FiberPhotometryResponseSeries,
@@ -36,7 +36,7 @@ from .photometry import FibersTable, FluorophoresTable, PhotodetectorsTable, Exc
     get_class(x, "ndx-photometry")
     for x in (
         "CommandedVoltageSeries",
-        "DeconvolvedRoiResponseSeries",
+        "DeconvolvedFiberPhotometryResponseSeries",
         "MultiCommandedVoltage",
         'FiberPhotometry',
         "FiberPhotometryResponseSeries",
