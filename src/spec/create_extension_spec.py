@@ -274,7 +274,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name="coordinates",
-                doc="injection taxonomical coordinates in (AP, ML, Z) in mm relative to Bregma",
+               doc="Fluorophore injection location in stereotactic coordinates (AP, ML, DV) mm relative to Bregma",
                 dtype="float",
                 shape=(None, 3),
                 neurodata_type_inc="VectorData",
