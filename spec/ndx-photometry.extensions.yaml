@@ -10,23 +10,6 @@ groups:
     shape:
     - null
     doc: location of fiber
-  - name: excitation_source
-    neurodata_type_inc: DynamicTableRegion
-    dtype: int
-    shape:
-    - null
-    doc: references rows of ExcitationSourcesTable
-  - name: photodetector
-    neurodata_type_inc: DynamicTableRegion
-    dtype: int
-    shape:
-    - null
-    doc: references rows of PhotodetectorsTable
-  - name: fluorophores
-    neurodata_type_inc: DynamicTableRegion
-    shape:
-    - null
-    doc: references rows of FluorophoresTable
   - name: notes
     neurodata_type_inc: VectorData
     dtype: text
@@ -233,4 +216,24 @@ groups:
     - null
     - 3
     doc: injection taxonomical coordinates in (AP, ML, Z) in mm relative to Bregma
+    quantity: '?'
+- neurodata_type_def: FiberPhotometryResponseSeries
+  neurodata_type_inc: TimeSeries
+  doc: Extends TimeSeries to hold Fiber Photometry data
+  datasets:
+  - name: fibers
+    neurodata_type_inc: DynamicTableRegion
+    doc: references row(s) of FibersTable
+    quantity: '?'
+  - name: excitation_sources
+    neurodata_type_inc: DynamicTableRegion
+    doc: references row(s) of ExcitationSourcesTable
+    quantity: '?'
+  - name: fluorophores
+    neurodata_type_inc: DynamicTableRegion
+    doc: references row(s) of FluorophoresTable
+    quantity: '?'
+  - name: photodetectors
+    neurodata_type_inc: DynamicTableRegion
+    doc: references row(s) of PhotodetectorsTable
     quantity: '?'
