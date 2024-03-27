@@ -10,7 +10,7 @@ from ndx_photometry import (
     FibersTable,
     PhotodetectorsTable,
     ExcitationSourcesTable,
-    DeconvolvedRoiResponseSeries,
+    DeconvolvedFiberPhotometryResponseSeries,
     MultiCommandedVoltage,
     FiberPhotometry,
     FluorophoresTable
@@ -33,7 +33,7 @@ class TestIntegrationRoundtrip(TestCase):
         FibersTable,
         PhotodetectorsTable,
         ExcitationSourcesTable,
-        DeconvolvedRoiResponseSeries,
+        DeconvolvedFiberPhotometryResponseSeries,
         MultiCommandedVoltage,
         FiberPhotometry,
         FluorophoresTable
@@ -107,8 +107,8 @@ class TestIntegrationRoundtrip(TestCase):
             rois=fibers_ref,
         )
 
-        deconv_roi_response_series = DeconvolvedRoiResponseSeries(
-            name="DeconvolvedRoiResponseSeries",
+        deconv_roi_response_series = DeconvolvedFiberPhotometryResponseSeries(
+            name="DeconvolvedFiberPhotometryResponseSeries",
             description="my roi response series",
             data=np.random.randn(100, 1),
             unit='F',

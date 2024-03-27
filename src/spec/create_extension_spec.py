@@ -64,6 +64,14 @@ def main():
                 neurodata_type_inc="VectorData",
             ),
             NWBDatasetSpec(
+                name="coordinates",
+                doc="Fiber placement in stereotactic coordinates (AP, ML, DV) mm relative to Bregma",
+                dtype="float",
+                shape=(None, 3),
+                neurodata_type_inc="VectorData",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
                 name="notes",
                 doc="description of fiber",
                 dtype="text",
@@ -243,35 +251,6 @@ def main():
         ],
     )
 
-    deconvolvedroiresponse_series = NWBGroupSpec(
-        neurodata_type_def="DeconvolvedRoiResponseSeries",
-        neurodata_type_inc="RoiResponseSeries",
-        doc="Extends RoiResponseSeries to hold deconvolved data",
-        links=[
-            NWBLinkSpec(
-                name="raw",
-                target_type="RoiResponseSeries",
-                doc="ref to roi response series",
-            )
-        ],
-        datasets=[
-            NWBDatasetSpec(
-                name="deconvolution_filter",
-                doc="description of deconvolution filter used",
-                dtype="text",
-                neurodata_type_inc="VectorData",
-                quantity="?",
-            ),
-            NWBDatasetSpec(
-                name="downsampling_filter",
-                doc="description of downsampling filter used",
-                dtype="text",
-                neurodata_type_inc="VectorData",
-                quantity="?",
-            ),
-        ],
-    )
-
     fluorophores_table = NWBGroupSpec(
         neurodata_type_def="FluorophoresTable",
         neurodata_type_inc="DynamicTable",
@@ -295,11 +274,35 @@ def main():
             ),
             NWBDatasetSpec(
                 name="coordinates",
-                doc="injection taxonomical coordinates in (AP, ML, Z) in mm relative to Bregma",
+               doc="Fluorophore injection location in stereotactic coordinates (AP, ML, DV) mm relative to Bregma",
                 dtype="float",
-                shape=(None,3),
+                shape=(None, 3),
                 neurodata_type_inc="VectorData",
                 quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="emission_peak_wavelength",
+                doc="Peak wavelength of emission of the fluorophore, in nanometers.",
+                dtype="float",
+                shape=(None,),
+                neurodata_type_inc="VectorData",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="excitation_peak_wavelength",
+                doc="Peak wavelength of excitation of the fluorophore, in nanometers.",
+                dtype="float",
+                shape=(None,),
+                neurodata_type_inc="VectorData",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
+                    )
+                ],
             ),
         ],
     )
@@ -371,17 +374,46 @@ def main():
         ]
     )
 
+    deconvolved_fiberphotometryresponse_series_series = NWBGroupSpec(
+        neurodata_type_def="DeconvolvedFiberPhotometryResponseSeries",
+        neurodata_type_inc="FiberPhotometryResponseSeries",
+        doc="Extends FiberPhotometryResponseSeries to hold deconvolved data",
+        links=[
+            NWBLinkSpec(
+                name="raw",
+                target_type="FiberPhotometryResponseSeries",
+                doc="ref to fiber photometry response series",
+            )
+        ],
+        datasets=[
+            NWBDatasetSpec(
+                name="deconvolution_filter",
+                doc="description of deconvolution filter used",
+                dtype="text",
+                neurodata_type_inc="VectorData",
+                quantity="?",
+            ),
+            NWBDatasetSpec(
+                name="downsampling_filter",
+                doc="description of downsampling filter used",
+                dtype="text",
+                neurodata_type_inc="VectorData",
+                quantity="?",
+            ),
+        ],
+    )
+
     # Add all new data types to this list
     new_data_types = [
         fibers_table,
         photodetectors_table,
         excitationsources_table,
+        fluorophores_table,
+        fiberphotometryresponse_series,
+        deconvolved_fiberphotometryresponse_series_series,
         commandedvoltage_series,
-        deconvolvedroiresponse_series,
         multi_commanded_voltage,
         fiber_photometry,
-        fluorophores_table,
-        fiberphotometryresponse_series
     ]
 
     # export the spec to yaml files in the spec folder

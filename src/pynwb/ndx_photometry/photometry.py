@@ -5,6 +5,7 @@ FibersTable = get_class('FibersTable', 'ndx-photometry')
 FluorophoresTable = get_class('FluorophoresTable', 'ndx-photometry')
 PhotodetectorsTable = get_class('PhotodetectorsTable', 'ndx-photometry')
 ExcitationSourcesTable = get_class('ExcitationSourcesTable', 'ndx-photometry')
+FiberPhotometryResponseSeries = get_class('FiberPhotometryResponseSeries', 'ndx-photometry')
 
 @docval(
     {'name': 'region', 'type': list, 'doc': 'the indices of the fibers table'},
