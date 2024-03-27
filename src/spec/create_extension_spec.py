@@ -293,8 +293,8 @@ def main():
                 ],
             ),
             NWBDatasetSpec(
-                name="excitation_lambda",
-                doc="Excitation wavelength of the fluorophore, in nanometers.",
+                name="excitation_peak_wavelength",
+                doc="Peak wavelength of excitation of the fluorophore, in nanometers.",
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
