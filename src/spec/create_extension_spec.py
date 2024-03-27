@@ -408,12 +408,12 @@ def main():
         fibers_table,
         photodetectors_table,
         excitationsources_table,
-        commandedvoltage_series,
+        fluorophores_table,
+        fiberphotometryresponse_series,
         deconvolved_fiberphotometryresponse_series_series,
+        commandedvoltage_series,
         multi_commanded_voltage,
         fiber_photometry,
-        fluorophores_table,
-        fiberphotometryresponse_series
     ]
 
     # export the spec to yaml files in the spec folder
