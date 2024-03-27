@@ -281,8 +281,8 @@ def main():
                 quantity="?",
             ),
             NWBDatasetSpec(
-                name="emission_lambda",
-                doc="Emission wavelength of the fluorophore, in nanometers.",
+                name="emission_peak_wavelength",
+                doc="Peak wavelength of emission of the fluorophore, in nanometers.",
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
