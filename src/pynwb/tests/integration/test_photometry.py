@@ -75,7 +75,7 @@ class TestIntegrationRoundtrip(TestCase):
         )
 
         excitationsources_table.add_row(
-            peak_wavelength=700.0,
+            excitation_wavelength=700.0,
             source_type="laser",
             commanded_voltage=commandedvoltage_series,
         )
@@ -83,7 +83,7 @@ class TestIntegrationRoundtrip(TestCase):
         photodetectors_table = PhotodetectorsTable(
             description="photodetectors table"
         )
-        photodetectors_table.add_row(peak_wavelength=500.0, type="PMT", gain=100.0)
+        photodetectors_table.add_row(detected_wavelength=500.0, type="PMT", gain=100.0)
 
         fluorophores_table = FluorophoresTable(
             description='fluorophores'

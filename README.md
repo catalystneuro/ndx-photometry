@@ -61,14 +61,14 @@ fibers_table.add_row(
 # Create an Excitation Sources table, and a one (or many) excitation source
 excitationsources_table = ExcitationSourcesTable(description="excitation sources table")
 excitationsources_table.add_row(
-    peak_wavelength=700.0,
+    excitation_wavelength=700.0,
     source_type="laser",
 )
 
 # Create a Photodetectors table, and add one (or many) photodetector
 photodetectors_table = PhotodetectorsTable(description="photodetectors table")
 photodetectors_table.add_row(
-    peak_wavelength=500.0,
+    detected_wavelength=500.0,
     type="PMT",
     gain=100.0
 )
@@ -79,8 +79,6 @@ fluorophores_table.add_row(
     label="dlight",
     location="VTA",
     coordinates=(3.0,2.0,1.0),
-    excitation_peak_wavelength=700.0,
-    emission_peak_wavelength=500.0
 )
 
 # Here we add the metadata tables to the metadata section

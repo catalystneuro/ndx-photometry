@@ -105,8 +105,8 @@ def main():
         doc="Extends DynamicTable to hold various Photodetectors",
         datasets=[
             NWBDatasetSpec(
-                name="peak_wavelength",
-                doc="peak wavelength of photodetector",
+                name="detected_wavelength",
+                doc="wavelength detected by photodetector",
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
@@ -150,8 +150,8 @@ def main():
         doc="Extends DynamicTable to hold various Excitation Sources",
         datasets=[
             NWBDatasetSpec(
-                name="peak_wavelength",
-                doc="peak wavelength of the excitation source",
+                name="excitation_wavelength",
+                doc="wavelength of the excitation source",
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
@@ -279,30 +279,6 @@ def main():
                 shape=(None, 3),
                 neurodata_type_inc="VectorData",
                 quantity="?",
-            ),
-            NWBDatasetSpec(
-                name="emission_peak_wavelength",
-                doc="Peak wavelength of emission of the fluorophore, in nanometers.",
-                dtype="float",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
-                    )
-                ],
-            ),
-            NWBDatasetSpec(
-                name="excitation_peak_wavelength",
-                doc="Peak wavelength of excitation of the fluorophore, in nanometers.",
-                dtype="float",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
-                    )
-                ],
             ),
         ],
     )
