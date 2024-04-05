@@ -379,6 +379,39 @@ def main():
         ],
     )
 
+    optical_filter = NWBGroupSpec(
+        neurodata_type_def="OpticalFilter",
+        neurodata_type_inc="Device",
+        doc="Extends Device to hold a Optical Filter",
+        datasets=[
+            NWBDatasetSpec(
+                name="peak_wavelength",
+                doc="wavelength that the filter is designed to pass or reflect",
+                dtype="float",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="bandwidth",
+                doc="width of the wavelength range that the filter allows to pass through or blocks",
+                dtype="float",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
+                    )
+                ],
+            ),
+            NWBAttributeSpec(
+                name="filter_type",
+                doc="type of filter (e.g., 'Excitation', 'Emission', 'Bandpass', 'Longpass', 'Shortpass')",
+                dtype="text",
+            ),
+        ],
+    )
+
     # Add all new data types to this list
     new_data_types = [
         fibers_table,
@@ -390,6 +423,7 @@ def main():
         commandedvoltage_series,
         multi_commanded_voltage,
         fiber_photometry,
+        optical_filter,
     ]
 
     # export the spec to yaml files in the spec folder
