@@ -412,6 +412,85 @@ def main():
         ],
     )
 
+    dichroic_mirror = NWBGroupSpec(
+        neurodata_type_def="DichroicMirror",
+        neurodata_type_inc="Device",
+        doc="Extends Device to hold a Dichroic Mirror",
+        datasets=[
+            NWBDatasetSpec(
+                name="cut_on_wavelength",
+                doc="wavelength at which the mirror starts to transmit light more than reflect",
+                dtype="float",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="wavelength unit",
+                        value="nanometers",
+                        dtype="text",
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="cut_off_wavelength",
+                doc="wavelength at which transmission shifts back to reflection, for mirrors with complex transmission spectra",
+                dtype="float",
+                quantity="?",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="wavelength unit",
+                        value="nanometers",
+                        dtype="text",
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="reflection_bandwidth",
+                doc="The range of wavelengths that are primarily reflected. The start and end wavelengths needs to be specified.",
+                dtype="float",
+                quantity="?",
+                shape=(2,),
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="wavelength unit",
+                        value="nanometers",
+                        dtype="text",
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="transmission_bandwidth",
+                doc="The range of wavelengths that are primarily transmitted. The start and end wavelengths needs to be specified.",
+                dtype="float",
+                quantity="?",
+                shape=(2,),
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="wavelength unit",
+                        value="nanometers",
+                        dtype="text",
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="angle_of_incidence",
+                doc="intended angle at which light strikes the mirror",
+                dtype="float",
+                quantity="?",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="angle unit",
+                        value="degrees",
+                        dtype="text",
+                    )
+                ],
+            ),
+        ],
+    )
+
     # Add all new data types to this list
     new_data_types = [
         fibers_table,
@@ -424,6 +503,7 @@ def main():
         multi_commanded_voltage,
         fiber_photometry,
         optical_filter,
+        dichroic_mirror,
     ]
 
     # export the spec to yaml files in the spec folder
