@@ -87,14 +87,6 @@ def main():
                 neurodata_type_inc="VectorData",
                 quantity="?",
             ),
-            NWBDatasetSpec(
-                name="dichroic_model_number",
-                doc="dichroic model number",
-                dtype="text",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-                quantity="?",
-            ),
         ],
     )
 
@@ -409,6 +401,12 @@ def main():
                 doc="type of filter (e.g., 'Excitation', 'Emission', 'Bandpass', 'Longpass', 'Shortpass')",
                 dtype="text",
             ),
+            NWBAttributeSpec(
+                name="model",
+                doc="model of the optical filter",
+                dtype="text",
+                quantity="?",
+            ),
         ],
     )
 
@@ -487,6 +485,12 @@ def main():
                         dtype="text",
                     )
                 ],
+            ),
+            NWBAttributeSpec(
+                name="model",
+                doc="model of the dichroic mirror",
+                dtype="text",
+                quantity="?",
             ),
         ],
     )
