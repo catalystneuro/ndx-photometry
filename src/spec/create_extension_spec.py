@@ -87,14 +87,6 @@ def main():
                 neurodata_type_inc="VectorData",
                 quantity="?",
             ),
-            NWBDatasetSpec(
-                name="dichroic_model_number",
-                doc="dichroic model number",
-                dtype="text",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-                quantity="?",
-            ),
         ],
     )
 
@@ -105,8 +97,8 @@ def main():
         doc="Extends DynamicTable to hold various Photodetectors",
         datasets=[
             NWBDatasetSpec(
-                name="peak_wavelength",
-                doc="peak wavelength of photodetector",
+                name="detected_wavelength",
+                doc="wavelength detected by photodetector",
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
@@ -150,8 +142,8 @@ def main():
         doc="Extends DynamicTable to hold various Excitation Sources",
         datasets=[
             NWBDatasetSpec(
-                name="peak_wavelength",
-                doc="peak wavelength of the excitation source",
+                name="excitation_wavelength",
+                doc="wavelength of the excitation source",
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
@@ -280,30 +272,6 @@ def main():
                 neurodata_type_inc="VectorData",
                 quantity="?",
             ),
-            NWBDatasetSpec(
-                name="emission_peak_wavelength",
-                doc="Peak wavelength of emission of the fluorophore, in nanometers.",
-                dtype="float",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
-                    )
-                ],
-            ),
-            NWBDatasetSpec(
-                name="excitation_peak_wavelength",
-                doc="Peak wavelength of excitation of the fluorophore, in nanometers.",
-                dtype="float",
-                shape=(None,),
-                neurodata_type_inc="VectorData",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
-                    )
-                ],
-            ),
         ],
     )
 
@@ -403,6 +371,130 @@ def main():
         ],
     )
 
+    optical_filter = NWBGroupSpec(
+        neurodata_type_def="OpticalFilter",
+        neurodata_type_inc="Device",
+        doc="Extends Device to hold a Optical Filter",
+        datasets=[
+            NWBDatasetSpec(
+                name="peak_wavelength",
+                doc="wavelength that the filter is designed to pass or reflect",
+                dtype="float",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="bandwidth",
+                doc="width of the wavelength range that the filter allows to pass through or blocks",
+                dtype="float",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
+                    )
+                ],
+            ),
+            NWBAttributeSpec(
+                name="filter_type",
+                doc="type of filter (e.g., 'Excitation', 'Emission', 'Bandpass', 'Longpass', 'Shortpass')",
+                dtype="text",
+            ),
+            NWBAttributeSpec(
+                name="model",
+                doc="model of the optical filter",
+                dtype="text",
+                quantity="?",
+            ),
+        ],
+    )
+
+    dichroic_mirror = NWBGroupSpec(
+        neurodata_type_def="DichroicMirror",
+        neurodata_type_inc="Device",
+        doc="Extends Device to hold a Dichroic Mirror",
+        datasets=[
+            NWBDatasetSpec(
+                name="cut_on_wavelength",
+                doc="wavelength at which the mirror starts to transmit light more than reflect",
+                dtype="float",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="wavelength unit",
+                        value="nanometers",
+                        dtype="text",
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="cut_off_wavelength",
+                doc="wavelength at which transmission shifts back to reflection, for mirrors with complex transmission spectra",
+                dtype="float",
+                quantity="?",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="wavelength unit",
+                        value="nanometers",
+                        dtype="text",
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="reflection_bandwidth",
+                doc="The range of wavelengths that are primarily reflected. The start and end wavelengths needs to be specified.",
+                dtype="float",
+                quantity="?",
+                shape=(2,),
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="wavelength unit",
+                        value="nanometers",
+                        dtype="text",
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="transmission_bandwidth",
+                doc="The range of wavelengths that are primarily transmitted. The start and end wavelengths needs to be specified.",
+                dtype="float",
+                quantity="?",
+                shape=(2,),
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="wavelength unit",
+                        value="nanometers",
+                        dtype="text",
+                    )
+                ],
+            ),
+            NWBDatasetSpec(
+                name="angle_of_incidence",
+                doc="intended angle at which light strikes the mirror",
+                dtype="float",
+                quantity="?",
+                attributes=[
+                    NWBAttributeSpec(
+                        name="unit",
+                        doc="angle unit",
+                        value="degrees",
+                        dtype="text",
+                    )
+                ],
+            ),
+            NWBAttributeSpec(
+                name="model",
+                doc="model of the dichroic mirror",
+                dtype="text",
+                quantity="?",
+            ),
+        ],
+    )
+
     # Add all new data types to this list
     new_data_types = [
         fibers_table,
@@ -414,6 +506,8 @@ def main():
         commandedvoltage_series,
         multi_commanded_voltage,
         fiber_photometry,
+        optical_filter,
+        dichroic_mirror,
     ]
 
     # export the spec to yaml files in the spec folder
