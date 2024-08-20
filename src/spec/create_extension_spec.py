@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os.path
 
 from pynwb.spec import (
@@ -12,44 +11,36 @@ from pynwb.spec import (
     NWBLinkSpec
 )
 
-# TODO: import the following spec classes as needed
-# from pynwb.spec import NWBDatasetSpec, NWBLinkSpec, NWBDtypeSpec, NWBRefSpec
-
 
 def main():
     # these arguments were auto-generated from your cookiecutter inputs
     ns_builder = NWBNamespaceBuilder(
-        doc="""extension for fiber photometry data""",
         name="""ndx-photometry""",
-        version="""0.1.0""",
-        author=list(map(str.strip, """Akshay Jaggi""".split(","))),
-        contact=list(map(str.strip, """akshay.x.jaggi@gmail.com""".split(","))),
+        version="""0.5.0""",
+        doc="""NWB extension for fiber photometry data""",
+        author=[
+            "Akshay Jaggi",
+            "Ben Dichter",
+            "Anna Szonja Weigl",
+            "Cody Baker",
+            "Paul Adkisson",
+            "Luiz Tauffer",
+            "Alessandra Trapani",
+            "Ryan Ly",
+        ],
+        contact=[
+            "akshay.x.jaggi@gmail.com",
+            "ben.dichter@catalystneuro.com",
+            "iszonja.weigl@catalystneuro.com",
+            "cody.baker@catalystneuro.com",
+            "paul.adkisson@catalystneuro.com",
+            "luiz.tauffer@catalystneuro.com",
+            "alessandra.trapani@catalystneuro.com",
+            "rly@lbl.gov",
+        ],
     )
+    ns_builder.include_namespace("core")
 
-    # TODO: specify the neurodata_types that are used by the extension as well
-    # as in which namespace they are found
-    # this is similar to specifying the Python modules that need to be imported
-    # to use your new data types
-    # as of HDMF 1.6.1, the full ancestry of the neurodata_types that are used by
-    # the extension should be included, i.e., the neurodata_type and its parent
-    # type and its parent type and so on. this will be addressed in a future
-    # release of HDMF.
-
-    ns_builder.include_type("TimeSeries", namespace="core")
-    ns_builder.include_type("NWBDataInterface", namespace="core")
-    ns_builder.include_type("NWBContainer", namespace="core")
-    ns_builder.include_type("RoiResponseSeries", namespace="core")
-    ns_builder.include_type("LabMetaData", namespace="core")
-    ns_builder.include_type("DynamicTable", namespace="hdmf-common")
-    ns_builder.include_type("DynamicTableRegion", namespace="hdmf-common")
-    ns_builder.include_type("VectorData", namespace="hdmf-common")
-    ns_builder.include_type("VectorIndex", namespace="hdmf-common")
-    ns_builder.include_type("Data", namespace="hdmf-common")
-    ns_builder.include_type("ElementIdentifiers", namespace="hdmf-common")
-
-    # TODO: define your new data types
-    # see https://pynwb.readthedocs.io/en/latest/extensions.html#extending-nwb
-    # for more information
     fibers_table = NWBGroupSpec(
         neurodata_type_def="FibersTable",
         neurodata_type_inc="DynamicTable",
