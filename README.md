@@ -1,6 +1,6 @@
 # ndx-photometry Extension for NWB
-[![Build Status](https://travis-ci.com/akshay-jaggi/ndx-photometry.svg?branch=master)](https://travis-ci.com/akshay-jaggi/ndx-photometry)
-[![Documentation Status](https://readthedocs.org/projects/ndx-photometry/badge/?version=latest)](https://ndx-photometry.readthedocs.io/en/latest/?badge=latest)
+<!-- [![Build Status](https://travis-ci.com/akshay-jaggi/ndx-photometry.svg?branch=master)](https://travis-ci.com/akshay-jaggi/ndx-photometry)
+[![Documentation Status](https://readthedocs.org/projects/ndx-photometry/badge/?version=latest)](https://ndx-photometry.readthedocs.io/en/latest/?badge=latest) -->
 
 ![NWB - Photometry](ndx-photometry.png)
 
