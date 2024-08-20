@@ -33,10 +33,7 @@ def fibers_table():
 
 
 def test_with_notes(fibers_table):
-    fibers_table.add_fiber(
-        excitation_source=0,
-        photodetector=0,
-        fluorophores=[0],
+    fibers_table.add_row(
         location="location",
         notes="notes",
     )
@@ -44,10 +41,7 @@ def test_with_notes(fibers_table):
 
 
 def test_without_notes(fibers_table):
-    fibers_table.add_fiber(
-        excitation_source=0,
-        photodetector=0,
-        fluorophores=[0],
+    fibers_table.add_row(
         location="location",
     )
     with pytest.raises(KeyError):

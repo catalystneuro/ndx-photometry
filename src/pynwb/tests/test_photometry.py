@@ -10,6 +10,7 @@ from ndx_photometry import (
     FibersTable,
     PhotodetectorsTable,
     ExcitationSourcesTable,
+    FiberPhotometryResponseSeries,
     DeconvolvedFiberPhotometryResponseSeries,
     MultiCommandedVoltage,
     FiberPhotometry,
@@ -73,32 +74,19 @@ class TestIntegrationRoundtrip(TestCase):
         photodetectors_table.add_row(peak_wavelength=500.0, type="PMT", gain=100.0)
 
         fluorophores_table = FluorophoresTable(description="fluorophores")
-        fluorophores_table.add_row(label="dlight", location="VTA", coordinates=(3.0, 2.0, 1.0))
+        fluorophores_table.add_row(
+            label="dlight",
+            location="VTA",
+            coordinates=(3.0, 2.0, 1.0),
+            excitation_peak_wavelength=470.0,
+            emission_peak_wavelength=516.0,
+        )
 
         fibers_table = FibersTable(description="fibers table")
 
-        fibers_ref = DynamicTableRegion(name="rois", data=[0], description="source fibers", table=fibers_table)
-
-        roi_response_series = RoiResponseSeries(
-            name="roi_response_series",
-            description="my roi response series",
-            data=np.random.randn(100, 1),
-            unit="F",
-            rate=30.0,
-            rois=fibers_ref,
+        fibers_table.add_row(
+            location="my location",
         )
-
-        deconv_roi_response_series = DeconvolvedFiberPhotometryResponseSeries(
-            name="DeconvolvedFiberPhotometryResponseSeries",
-            description="my roi response series",
-            data=np.random.randn(100, 1),
-            unit="F",
-            rate=30.0,
-            rois=fibers_ref,
-            raw=roi_response_series,
-        )
-
-        ophys_module = self.nwbfile.create_processing_module(name="ophys", description="fiber photometry")
 
         self.nwbfile.add_lab_meta_data(
             FiberPhotometry(
@@ -110,14 +98,36 @@ class TestIntegrationRoundtrip(TestCase):
             )
         )
 
-        fibers_table.add_fiber(
-            excitation_source=0,
-            photodetector=0,
-            fluorophores=[0],
-            location="my location",
+        fiber_ref = fibers_table.create_fiber_region(region=[0], description="source fiber")
+        excitation_ref = excitationsources_table.create_excitation_source_region(
+            region=[0], description="excitation sources"
+        )
+        photodetector_ref = photodetectors_table.create_photodetector_region(region=[0], description="photodetector")
+        fluorophore_ref = fluorophores_table.create_fluorophore_region(region=[0], description="fluorophore")
+
+        fp_response_series = FiberPhotometryResponseSeries(
+            name="MyFPRecording",
+            data=np.random.randn(100, 1),
+            unit="F",
+            rate=30.0,
+            fibers=fiber_ref,
+            excitation_sources=excitation_ref,
+            photodetectors=photodetector_ref,
+            fluorophores=fluorophore_ref,
         )
 
-        self.nwbfile.add_acquisition(roi_response_series)
+        self.nwbfile.add_acquisition(fp_response_series)
+
+        deconv_roi_response_series = DeconvolvedFiberPhotometryResponseSeries(
+            name="DeconvolvedFiberPhotometryResponseSeries",
+            description="my roi response series",
+            data=np.random.randn(100, 1),
+            unit="F",
+            rate=30.0,
+            raw=fp_response_series,
+        )
+
+        ophys_module = self.nwbfile.create_processing_module(name="ophys", description="fiber photometry")
         ophys_module.add(deconv_roi_response_series)
 
         with NWBHDF5IO(self.path, mode="w") as io:
@@ -129,4 +139,7 @@ class TestIntegrationRoundtrip(TestCase):
             self.assertContainerEqual(
                 self.nwbfile.lab_meta_data["fiber_photometry"], read_nwbfile.lab_meta_data["fiber_photometry"]
             )
-            self.assertContainerEqual(roi_response_series, read_nwbfile.acquisition["roi_response_series"])
+            self.assertContainerEqual(fp_response_series, read_nwbfile.acquisition["MyFPRecording"])
+            self.assertContainerEqual(
+                deconv_roi_response_series, read_nwbfile.processing["ophys"]["DeconvolvedFiberPhotometryResponseSeries"]
+            )
