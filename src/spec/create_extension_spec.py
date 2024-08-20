@@ -31,7 +31,7 @@ def main():
         contact=[
             "akshay.x.jaggi@gmail.com",
             "ben.dichter@catalystneuro.com",
-            "iszonja.weigl@catalystneuro.com",
+            "szonja.weigl@catalystneuro.com",
             "cody.baker@catalystneuro.com",
             "paul.adkisson@catalystneuro.com",
             "luiz.tauffer@catalystneuro.com",

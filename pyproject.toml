@@ -8,7 +8,7 @@ version = "0.5.0"
 authors = [
     { name="Akshay Jaggi", email="akshay.x.jaggi@gmail.com" },
     { name="Ben Dichter", email="ben.dichter@catalystneuro.com" },
-    { name="Anna Szonja Weigl", email="iszonja.weigl@catalystneuro.com" },
+    { name="Anna Szonja Weigl", email="szonja.weigl@catalystneuro.com" },
     { name="Cody Baker", email="cody.baker@catalystneuro.com" },
     { name="Paul Adkisson", email="paul.adkisson@catalystneuro.com" },
     { name="Luiz Tauffer", email="luiz.tauffer@catalystneuro.com" },
