@@ -108,6 +108,7 @@ exclude = [
   "build/",
   "dist/",
   "docs/source/conf.py",
+  "example.py",
 ]
 line-length = 120
 

@@ -5,7 +5,7 @@
 ![NWB - Photometry](ndx-photometry.png)
 
 ## Introduction
-This is an NWB extension for storing photometry recordings and associated metadata. This extension stores photometry information across three folders in the NWB file: acquisition, processing, and general. The acquisiton folder contains a `FiberPhotometryResponseSeries` which references rows of `FibersTable`, `ExcitationSourcesTable`, `PhotodetectorsTable` and `FluorophoresTable`. The new types for this extension are in metadata and processing.
+This is an NWB extension for storing photometry recordings and associated metadata. This extension stores photometry information across three folders in the NWB file: acquisition, processing, and general. The acquisition folder contains a `FiberPhotometryResponseSeries` which references rows of `FibersTable`, `ExcitationSourcesTable`, `PhotodetectorsTable` and `FluorophoresTable`. The new types for this extension are in metadata and processing.
 
 ### Metadata
 1. `FibersTable` stores rows for each fiber with information about the location, photodetector, and more (associated with each fiber).

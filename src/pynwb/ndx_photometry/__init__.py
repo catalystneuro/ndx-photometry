@@ -27,8 +27,9 @@ from .photometry import (
     FluorophoresTable,
     PhotodetectorsTable,
     ExcitationSourcesTable,
-    FiberPhotometryResponseSeries
+    FiberPhotometryResponseSeries,
 )
+
 (
     CommandedVoltageSeries,
     DeconvolvedFiberPhotometryResponseSeries,
@@ -40,7 +41,7 @@ from .photometry import (
         "CommandedVoltageSeries",
         "DeconvolvedFiberPhotometryResponseSeries",
         "MultiCommandedVoltage",
-        'FiberPhotometry',
+        "FiberPhotometry",
     )
 ]
 

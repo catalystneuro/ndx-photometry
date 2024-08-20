@@ -9,6 +9,7 @@ from ndx_photometry import (
     FluorophoresTable,
 )
 
+
 @pytest.fixture()
 def fibers_table():
     nwbfile = NWBFile(
@@ -30,6 +31,7 @@ def fibers_table():
     )
     return fibers_table
 
+
 def test_with_notes(fibers_table):
     fibers_table.add_fiber(
         excitation_source=0,
@@ -39,6 +41,7 @@ def test_with_notes(fibers_table):
         notes="notes",
     )
     assert fibers_table["notes"][0] == "notes"
+
 
 def test_without_notes(fibers_table):
     fibers_table.add_fiber(
@@ -50,6 +53,7 @@ def test_without_notes(fibers_table):
     with pytest.raises(KeyError):
         fibers_table["notes"][0]
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     test_with_notes(fibers_table)
     test_without_notes(fibers_table)
