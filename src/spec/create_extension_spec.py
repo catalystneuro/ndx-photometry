@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os.path
 
 from pynwb.spec import (
@@ -9,51 +8,43 @@ from pynwb.spec import (
     NWBAttributeSpec,
     NWBDatasetSpec,
     NWBRefSpec,
-    NWBLinkSpec
+    NWBLinkSpec,
 )
-
-# TODO: import the following spec classes as needed
-# from pynwb.spec import NWBDatasetSpec, NWBLinkSpec, NWBDtypeSpec, NWBRefSpec
 
 
 def main():
     # these arguments were auto-generated from your cookiecutter inputs
     ns_builder = NWBNamespaceBuilder(
-        doc="""extension for fiber photometry data""",
         name="""ndx-photometry""",
-        version="""0.1.0""",
-        author=list(map(str.strip, """Akshay Jaggi""".split(","))),
-        contact=list(map(str.strip, """akshay.x.jaggi@gmail.com""".split(","))),
+        version="""0.5.0""",
+        doc="""NWB extension for fiber photometry data""",
+        author=[
+            "Akshay Jaggi",
+            "Ben Dichter",
+            "Anna Szonja Weigl",
+            "Cody Baker",
+            "Paul Adkisson",
+            "Luiz Tauffer",
+            "Alessandra Trapani",
+            "Ryan Ly",
+        ],
+        contact=[
+            "akshay.x.jaggi@gmail.com",
+            "ben.dichter@catalystneuro.com",
+            "szonja.weigl@catalystneuro.com",
+            "cody.baker@catalystneuro.com",
+            "paul.adkisson@catalystneuro.com",
+            "luiz.tauffer@catalystneuro.com",
+            "alessandra.trapani@catalystneuro.com",
+            "rly@lbl.gov",
+        ],
     )
+    ns_builder.include_namespace("core")
 
-    # TODO: specify the neurodata_types that are used by the extension as well
-    # as in which namespace they are found
-    # this is similar to specifying the Python modules that need to be imported
-    # to use your new data types
-    # as of HDMF 1.6.1, the full ancestry of the neurodata_types that are used by
-    # the extension should be included, i.e., the neurodata_type and its parent
-    # type and its parent type and so on. this will be addressed in a future
-    # release of HDMF.
-
-    ns_builder.include_type("TimeSeries", namespace="core")
-    ns_builder.include_type("NWBDataInterface", namespace="core")
-    ns_builder.include_type("NWBContainer", namespace="core")
-    ns_builder.include_type("RoiResponseSeries", namespace="core")
-    ns_builder.include_type("LabMetaData", namespace="core")
-    ns_builder.include_type("DynamicTable", namespace="hdmf-common")
-    ns_builder.include_type("DynamicTableRegion", namespace="hdmf-common")
-    ns_builder.include_type("VectorData", namespace="hdmf-common")
-    ns_builder.include_type("VectorIndex", namespace="hdmf-common")
-    ns_builder.include_type("Data", namespace="hdmf-common")
-    ns_builder.include_type("ElementIdentifiers", namespace="hdmf-common")
-
-    # TODO: define your new data types
-    # see https://pynwb.readthedocs.io/en/latest/extensions.html#extending-nwb
-    # for more information
     fibers_table = NWBGroupSpec(
         neurodata_type_def="FibersTable",
         neurodata_type_inc="DynamicTable",
-        name='fibers',
+        name="fibers",
         doc="Extends DynamicTable to hold various Fibers",
         datasets=[
             NWBDatasetSpec(
@@ -101,7 +92,7 @@ def main():
     photodetectors_table = NWBGroupSpec(
         neurodata_type_def="PhotodetectorsTable",
         neurodata_type_inc="DynamicTable",
-        name='photodetectors',
+        name="photodetectors",
         doc="Extends DynamicTable to hold various Photodetectors",
         datasets=[
             NWBDatasetSpec(
@@ -111,11 +102,7 @@ def main():
                 shape=(None,),
                 neurodata_type_inc="VectorData",
                 quantity="?",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
-                    )
-                ],
+                attributes=[NWBAttributeSpec(name="unit", doc="wavelength unit", value="nanometers", dtype="text")],
             ),
             NWBDatasetSpec(
                 name="type",
@@ -155,11 +142,7 @@ def main():
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
-                    )
-                ],
+                attributes=[NWBAttributeSpec(name="unit", doc="wavelength unit", value="nanometers", dtype="text")],
             ),
             NWBDatasetSpec(
                 name="source_type",
@@ -171,9 +154,7 @@ def main():
             NWBDatasetSpec(
                 name="commanded_voltage",
                 doc="references CommandedVoltageSeries",
-                dtype=NWBRefSpec(
-                    target_type="CommandedVoltageSeries", reftype="object"
-                ),
+                dtype=NWBRefSpec(target_type="CommandedVoltageSeries", reftype="object"),
                 shape=(None,),
                 neurodata_type_inc="VectorData",
                 quantity="?",
@@ -207,38 +188,26 @@ def main():
                 doc="voltages (length number timesteps) in unit volts",
                 dtype="float",
                 shape=(None,),
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="data unit", value="volts", dtype="text"
-                    )
-                ],
+                attributes=[NWBAttributeSpec(name="unit", doc="data unit", value="volts", dtype="text")],
             ),
             NWBDatasetSpec(
                 name="frequency",
                 doc="voltage frequency in unit hertz",
                 dtype="float",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="frequency unit", value="hertz", dtype="text"
-                    )
-                ],
+                attributes=[NWBAttributeSpec(name="unit", doc="frequency unit", value="hertz", dtype="text")],
                 quantity="?",
             ),
             NWBDatasetSpec(
                 name="power",
                 doc="voltage power in unit volts",
                 dtype="float",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="power unit", value="volts", dtype="text"
-                    )
-                ],
+                attributes=[NWBAttributeSpec(name="unit", doc="power unit", value="volts", dtype="text")],
             ),
         ],
     )
 
     multi_commanded_voltage = NWBGroupSpec(
-        name='commanded_voltages',
+        name="commanded_voltages",
         neurodata_type_def="MultiCommandedVoltage",
         neurodata_type_inc="NWBDataInterface",
         doc="holds CommandedVoltageSeries objects",
@@ -254,7 +223,7 @@ def main():
     fluorophores_table = NWBGroupSpec(
         neurodata_type_def="FluorophoresTable",
         neurodata_type_inc="DynamicTable",
-        name='fluorophores',
+        name="fluorophores",
         doc="Extends DynamicTable to hold various Fluorophores",
         datasets=[
             NWBDatasetSpec(
@@ -266,7 +235,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name="location",
-                doc='injection brain region name',
+                doc="injection brain region name",
                 dtype="text",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
@@ -274,7 +243,7 @@ def main():
             ),
             NWBDatasetSpec(
                 name="coordinates",
-               doc="Fluorophore injection location in stereotactic coordinates (AP, ML, DV) mm relative to Bregma",
+                doc="Fluorophore injection location in stereotactic coordinates (AP, ML, DV) mm relative to Bregma",
                 dtype="float",
                 shape=(None, 3),
                 neurodata_type_inc="VectorData",
@@ -286,11 +255,7 @@ def main():
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
-                    )
-                ],
+                attributes=[NWBAttributeSpec(name="unit", doc="wavelength unit", value="nanometers", dtype="text")],
             ),
             NWBDatasetSpec(
                 name="excitation_peak_wavelength",
@@ -298,48 +263,34 @@ def main():
                 dtype="float",
                 shape=(None,),
                 neurodata_type_inc="VectorData",
-                attributes=[
-                    NWBAttributeSpec(
-                        name="unit", doc="wavelength unit", value="nanometers", dtype="text"
-                    )
-                ],
+                attributes=[NWBAttributeSpec(name="unit", doc="wavelength unit", value="nanometers", dtype="text")],
             ),
         ],
     )
 
     fiber_photometry = NWBGroupSpec(
-        neurodata_type_def='FiberPhotometry',
-        neurodata_type_inc='LabMetaData',
-        name='fiber_photometry',
-        doc='all Fiber Photometry metadata',
+        neurodata_type_def="FiberPhotometry",
+        neurodata_type_inc="LabMetaData",
+        name="fiber_photometry",
+        doc="all Fiber Photometry metadata",
         groups=[
+            NWBGroupSpec(name="fibers", neurodata_type_inc="FibersTable", doc="table of fibers used"),
             NWBGroupSpec(
-                name='fibers',
-                neurodata_type_inc='FibersTable',
-                doc='table of fibers used'
+                name="excitation_sources",
+                neurodata_type_inc="ExcitationSourcesTable",
+                doc="table of excitation sources used",
             ),
             NWBGroupSpec(
-                name='excitation_sources',
-                neurodata_type_inc='ExcitationSourcesTable',
-                doc='table of excitation sources used'
+                name="photodetectors", neurodata_type_inc="PhotodetectorsTable", doc="table of photodetectors used"
             ),
+            NWBGroupSpec(name="fluorophores", neurodata_type_inc="FluorophoresTable", doc="table of fluorophores used"),
             NWBGroupSpec(
-                name='photodetectors',
-                neurodata_type_inc='PhotodetectorsTable',
-                doc='table of photodetectors used'
-            ),
-            NWBGroupSpec(
-                name='fluorophores',
-                neurodata_type_inc='FluorophoresTable',
-                doc='table of fluorophores used'
-            ),
-            NWBGroupSpec(
-                name='commanded_voltages',
-                neurodata_type_inc='MultiCommandedVoltage',
-                doc='multiple commanded voltage container',
+                name="commanded_voltages",
+                neurodata_type_inc="MultiCommandedVoltage",
+                doc="multiple commanded voltage container",
                 quantity="?",
-            )
-        ]
+            ),
+        ],
     )
 
     fiberphotometryresponse_series = NWBGroupSpec(
@@ -371,7 +322,7 @@ def main():
                 neurodata_type_inc="DynamicTableRegion",
                 quantity="?",
             ),
-        ]
+        ],
     )
 
     deconvolved_fiberphotometryresponse_series_series = NWBGroupSpec(
@@ -417,9 +368,7 @@ def main():
     ]
 
     # export the spec to yaml files in the spec folder
-    output_dir = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "..", "..", "spec")
-    )
+    output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "spec"))
     export_spec(ns_builder, new_data_types, output_dir)
 
 

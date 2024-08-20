@@ -1,5 +1,5 @@
 Specification for the ndx-photometry extension
-==================================
+==============================================
 
 .. toctree::
     :numbered:

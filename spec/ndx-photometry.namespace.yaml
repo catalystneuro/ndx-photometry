@@ -1,25 +1,25 @@
 namespaces:
 - author:
   - Akshay Jaggi
+  - Ben Dichter
+  - Anna Szonja Weigl
+  - Cody Baker
+  - Paul Adkisson
+  - Luiz Tauffer
+  - Alessandra Trapani
+  - Ryan Ly
   contact:
   - akshay.x.jaggi@gmail.com
-  doc: extension for fiber photometry data
+  - ben.dichter@catalystneuro.com
+  - szonja.weigl@catalystneuro.com
+  - cody.baker@catalystneuro.com
+  - paul.adkisson@catalystneuro.com
+  - luiz.tauffer@catalystneuro.com
+  - alessandra.trapani@catalystneuro.com
+  - rly@lbl.gov
+  doc: NWB extension for fiber photometry data
   name: ndx-photometry
   schema:
   - namespace: core
-    neurodata_types:
-    - TimeSeries
-    - NWBDataInterface
-    - NWBContainer
-    - RoiResponseSeries
-    - LabMetaData
-  - namespace: hdmf-common
-    neurodata_types:
-    - DynamicTable
-    - DynamicTableRegion
-    - VectorData
-    - VectorIndex
-    - Data
-    - ElementIdentifiers
   - source: ndx-photometry.extensions.yaml
-  version: 0.1.0
+  version: 0.5.0
