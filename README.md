@@ -1,4 +1,7 @@
 # ndx-photometry Extension for NWB
+
+**This extension is deprecated. Please use the more updated https://github.com/catalystneuro/ndx-fiber-photometry extension instead.**
+
 <!-- [![Build Status](https://travis-ci.com/akshay-jaggi/ndx-photometry.svg?branch=master)](https://travis-ci.com/akshay-jaggi/ndx-photometry)
 [![Documentation Status](https://readthedocs.org/projects/ndx-photometry/badge/?version=latest)](https://ndx-photometry.readthedocs.io/en/latest/?badge=latest) -->
 
